@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'model_constants.dart';
+import '../model_constants.dart';
 
 class Exercise {
   /// Constructs a new exercise object

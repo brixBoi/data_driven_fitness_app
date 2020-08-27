@@ -1,4 +1,4 @@
-import 'routine.dart';
+import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.dart';
 
 class Program {
   Program.name(this.programName, this.description) {

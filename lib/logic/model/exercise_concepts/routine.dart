@@ -1,6 +1,7 @@
+import 'package:data_driven_fitness_app/logic/model/exercise_concepts/workout_program.dart';
+
+import '../model_constants.dart';
 import 'exercise.dart';
-import 'model_constants.dart';
-import 'workout_program.dart';
 
 class Routine {
   Program program;

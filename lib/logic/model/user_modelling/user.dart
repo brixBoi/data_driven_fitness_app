@@ -1,6 +1,5 @@
-import 'package:data_driven_fitness_app/logic/model/user_statistics.dart';
-
-import 'user_regime.dart';
+import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.dart';
+import 'package:data_driven_fitness_app/logic/model/user_modelling/user_statistics.dart';
 
 class User {
   /// Constructs a new User object with all attributes specified
