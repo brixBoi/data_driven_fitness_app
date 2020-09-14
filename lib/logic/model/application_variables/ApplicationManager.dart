@@ -7,6 +7,7 @@ class ApplicationManager {
 
   UserData userData;
 
+
   String getInitialRoute() {
     if (userData.userLoggedIn) {
       return HomeScreen.routeName;

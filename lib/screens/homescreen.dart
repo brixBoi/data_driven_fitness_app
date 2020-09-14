@@ -1,3 +1,4 @@
+import 'package:data_driven_fitness_app/custom_widgets/bottom_navbar.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
 import 'package:data_driven_fitness_app/screens/history_screen.dart';
 import 'package:data_driven_fitness_app/screens/stats_screen.dart';
@@ -33,52 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
           "Welcome " + Provider.of<UserData>(context).loggedInUser.firstName,
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          padding: EdgeInsets.all(5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.home,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, HomeScreen.routeName);
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.show_chart,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, StatsScreen.routeName);
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.fitness_center,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, WorkoutScreen.routeName);
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.calendar_today,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, HistoryScreen.routeName);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
+
