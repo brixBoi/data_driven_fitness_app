@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 class LoginSignupScreen extends StatelessWidget {
-  static final String routeName = "/login_signup_screen";
+  static const String routeName = "/login_signup_screen";
 
   @override
   Widget build(BuildContext context) {

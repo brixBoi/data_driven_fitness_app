@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class UserData extends ChangeNotifier {
   //TODO: Initialize user data from database properties
   UserData() {
-    loggedInUser = User.blank(1, "testuser@email.com", "Test", "User", 188, 87);
+    loggedInUser = User.blank(1, "testuser@email.com", "Zach", "User", 188, 87);
     userLoggedIn = true;
   }
 
