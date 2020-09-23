@@ -4,6 +4,7 @@ import 'package:data_driven_fitness_app/logic/model/application_variables/applic
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard.dart';
 import 'package:data_driven_fitness_app/screens/login_signup_screen.dart';
+import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,9 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         routes: {
           Dashboard.routeName: (context) => Dashboard(),
-          LoginSignupScreen.routeName: (context) => LoginSignupScreen(),
+          LoginSignupScreen.routeName: (context) =>
+              LoginSignupScreen(appManager),
+          SignupScreen.routeName: (context) => SignupScreen(),
         },
         initialRoute: appManager.getInitialRoute(),
         theme: Constants.kappLightTheme,
