@@ -1,5 +1,6 @@
 import 'package:data_driven_fitness_app/custom_widgets/big_button.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
@@ -74,7 +75,8 @@ class LoginSignupScreen extends StatelessWidget {
                             title: 'Signup',
                             textColor: Colors.white,
                             onPress: () {
-                              appManager.signup(context);
+                              Navigator.of(context)
+                                  .pushNamed(SignupScreen.routeName);
                             },
                           ),
                           SizedBox(

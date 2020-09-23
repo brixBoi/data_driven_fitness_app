@@ -1,8 +1,8 @@
+import 'package:data_driven_fitness_app/logic/database_functions/database_functions.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/application_data.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard.dart';
 import 'package:data_driven_fitness_app/screens/login_signup_screen.dart';
-import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationManager extends ChangeNotifier {
@@ -10,6 +10,7 @@ class ApplicationManager extends ChangeNotifier {
 
   UserData userData;
   ApplicationData applicationData;
+  DatabaseFunctions dbf = DatabaseFunctions();
 
   String getInitialRoute() {
     if (userData.userLoggedIn) {
@@ -35,10 +36,24 @@ class ApplicationManager extends ChangeNotifier {
     _firstTimeUser();
   }
 
-  bool signup(BuildContext context) {
+  bool signup(
+    BuildContext context,
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+  ) {
     print('Signing up');
-
-    Navigator.of(context).pushNamed(SignupScreen.routeName);
+    if (dbf.checkExistingEmail(email)) {
+      throw new Exception('Email already exists');
+    } else {
+      userData.setLoggedInUser(dbf.signup(
+        firstName,
+        lastName,
+        email,
+        password,
+      ));
+    }
   }
 
   void _firstTimeUser() {}

@@ -4,11 +4,21 @@ import 'package:data_driven_fitness_app/logic/model/user_modelling/user_statisti
 class User {
   /// Constructs a new User object with all attributes specified
   User(this.personId, this.email, this.firstName, this.lastName,
-      this.userStatistics, this.userRegime);
+      this.userStatistics, this.userRegime) {
+    initialized = true;
+  }
 
   /// Constructs a new User object with blank UserRegime and UserStatistics
-  User.blank(this.personId, this.email, this.firstName, this.lastName,
-      double height, double weight) {
+  User.blank(
+    this.personId,
+    this.email,
+    this.firstName,
+    this.lastName,
+  ) {
+    initialized = false;
+  }
+
+  void initializeUser(double height, double weight) {
     this.userStatistics = UserStatistics(height, weight, Set(), Set());
     this.userRegime = UserRegime.blank();
   }
@@ -19,4 +29,5 @@ class User {
   String lastName;
   UserStatistics userStatistics;
   UserRegime userRegime;
+  bool initialized;
 }
