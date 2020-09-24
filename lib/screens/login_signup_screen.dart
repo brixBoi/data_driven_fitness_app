@@ -1,5 +1,6 @@
 import 'package:data_driven_fitness_app/custom_widgets/big_button.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/screens/signin_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -71,7 +72,7 @@ class LoginSignupScreen extends StatelessWidget {
                         children: [
                           BigButton(
                             boxDecoration: BoxDecoration(
-                                gradient: Constants.kGradientLight),
+                                gradient: Constants.kGradientLightBlue),
                             title: 'Signup',
                             textColor: Colors.white,
                             onPress: () {
@@ -87,7 +88,47 @@ class LoginSignupScreen extends StatelessWidget {
                             title: 'Sign in with Social Media',
                             textColor: Theme.of(context).accentColor,
                             onPress: () {
-//                              appManager.login(context);
+                              showModalBottomSheet<void>(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                        gradient:
+                                            Constants.kBackgroundGradientBlue),
+                                    height: 160,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: SizedBox(
+                                            width: 250,
+                                            child: GoogleSignInButton(
+                                              darkMode: true,
+                                              onPressed: () {
+                                                appManager
+                                                    .loginWithGoogle(context);
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: FacebookSignInButton(
+                                            onPressed: () {
+                                              appManager
+                                                  .loginWithFacebook(context);
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
                             },
                           ),
                           SizedBox(
@@ -104,7 +145,10 @@ class LoginSignupScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(right: 30.0),
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(SignInScreen.routeName);
+                              },
                               padding: EdgeInsets.all(0),
                               child: Text(
                                 'Sign in',

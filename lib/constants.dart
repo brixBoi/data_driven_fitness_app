@@ -30,27 +30,36 @@ class Constants {
         bodyText1: TextStyle()),
   );
 
-  static final kGradientLight = LinearGradient(
+  static final kGradientLightBlue = LinearGradient(
     colors: [
       Color(0xFF5063EE),
       Color(0xFF23253A),
     ],
   );
 
-  static final kGradientLightFlip = LinearGradient(
+  static final kGradientLightOrange = LinearGradient(
     colors: [
-      Color(0xFF23253A),
-      Color(0xFF5063EE),
+      Color(0xFFF99543),
+      Color(0xFFF28D45),
     ],
   );
 
-  static final kBackgroundGradient = LinearGradient(
+  static final kBackgroundGradientBlue = LinearGradient(
 //    stops: [0.1, 0.4, 0.7, 1.0],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
       Color(0xFF5063EE),
       Color(0xFF23253A),
+    ],
+  );
+  static final kBackgroundGradientOrange = LinearGradient(
+//    stops: [0.1, 0.4, 0.7, 1.0],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0xFFF99543),
+      Color(0xFFEF7656),
     ],
   );
 }

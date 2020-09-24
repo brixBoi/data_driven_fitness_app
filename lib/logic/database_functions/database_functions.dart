@@ -1,11 +1,12 @@
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
 
 class DatabaseFunctions {
-  User sampleUser = User.blank(1, "testuser@email.com", "Test", "User");
+  User sampleUser = User.blank(1, "zachmartin9001@gmail.com", "Test", "User");
 
   /// Temp function for testing
   User login(String userName, String userPassword) {
     if (userName == sampleUser.email && userPassword == 'Abcd1234!') {
+      print('Login Successful');
       return sampleUser;
     } else {
       throw Exception('Invalid email / password');

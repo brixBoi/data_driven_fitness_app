@@ -22,7 +22,7 @@ class ApplicationManager extends ChangeNotifier {
     }
   }
 
-  bool login(
+  void login(
     BuildContext context,
     String email,
     String password,
@@ -35,17 +35,16 @@ class ApplicationManager extends ChangeNotifier {
         Navigator.of(context).pushNamed(FirstTimeUserScreen.routeName);
       }
     } catch (e) {
-      throw Exception('Invalid login');
+      throw Exception('Invalid email / password');
     }
   }
 
   bool loginWithGoogle(BuildContext context) {
-//    login(context);
-//    print('Via google');
+    login(context, 'zachmartin9001@gmail.com', 'Abcd1234!');
   }
 
   bool loginWithFacebook(BuildContext context) {
-    _firstTimeUser();
+    login(context, 'zachmartin9001@gmail.com', 'Abcd1234!');
   }
 
   bool signup(
@@ -68,8 +67,6 @@ class ApplicationManager extends ChangeNotifier {
       login(context, email, password);
     }
   }
-
-  void _firstTimeUser() {}
 
   void initializeCurrentUser(
     BuildContext context,

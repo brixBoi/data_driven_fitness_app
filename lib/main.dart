@@ -5,6 +5,7 @@ import 'package:data_driven_fitness_app/logic/model/application_variables/user_d
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard.dart';
 import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/login_signup_screen.dart';
+import 'package:data_driven_fitness_app/screens/signin_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class _MyAppState extends State<MyApp> {
               LoginSignupScreen(appManager),
           SignupScreen.routeName: (context) => SignupScreen(),
           FirstTimeUserScreen.routeName: (context) => FirstTimeUserScreen(),
+          SignInScreen.routeName: (context) => SignInScreen(),
         },
         initialRoute: appManager.getInitialRoute(),
         theme: Constants.kappLightTheme,

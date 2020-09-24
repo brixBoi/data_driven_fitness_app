@@ -14,7 +14,7 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bottom = MediaQuery.of(context).viewInsets.bottom;
     return Container(
-      decoration: BoxDecoration(gradient: Constants.kBackgroundGradient),
+      decoration: BoxDecoration(gradient: Constants.kBackgroundGradientBlue),
       child: Scaffold(
         backgroundColor: Colors.transparent,
 //        extendBodyBehindAppBar: true,
@@ -138,7 +138,7 @@ class _SignupFormState extends State<SignupForm> {
                   title: 'Submit',
                   textColor: Colors.white,
                   boxDecoration:
-                      BoxDecoration(gradient: Constants.kGradientLight),
+                      BoxDecoration(gradient: Constants.kGradientLightBlue),
                   width: 170.0,
                   height: 65.0,
                   onPress: () {

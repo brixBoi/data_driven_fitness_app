@@ -13,6 +13,7 @@ class SignupField extends StatelessWidget {
     this.textEntryColor,
     this.height,
     this.width,
+    this.errorTextColor,
   }) : super(key: key);
 
   final TextInputType keyboardType;
@@ -22,6 +23,7 @@ class SignupField extends StatelessWidget {
   final String regex;
   final TextEditingController controller;
   final Color fieldColor;
+  final Color errorTextColor;
   final Color textEntryColor;
   final int height;
   final int width;
@@ -46,7 +48,11 @@ class SignupField extends StatelessWidget {
               color: fieldColor,
             ),
             labelText: label,
-            errorStyle: TextStyle(fontSize: 15, color: Colors.redAccent),
+            errorStyle: TextStyle(
+              fontSize: 15,
+              color:
+                  (errorTextColor != null) ? errorTextColor : Colors.redAccent,
+            ),
           ),
           keyboardType: keyboardType,
           validator: (value) {

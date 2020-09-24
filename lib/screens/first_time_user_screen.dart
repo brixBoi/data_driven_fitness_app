@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 class FirstTimeUserScreen extends StatefulWidget {
   // Constant for route navigation
   static final String routeName = "/first_timeuser_screen";
-  TextEditingController heightFieldontroller = TextEditingController();
-  TextEditingController weightFieldontroller = TextEditingController();
+  final TextEditingController heightFieldontroller = TextEditingController();
+  final TextEditingController weightFieldontroller = TextEditingController();
 
   @override
   _FirstTimeUserScreenState createState() => _FirstTimeUserScreenState();
@@ -106,7 +106,7 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
                     padding: const EdgeInsets.all(30.0),
                     child: BigButton(
                       boxDecoration: BoxDecoration(
-                        gradient: Constants.kGradientLight,
+                        gradient: Constants.kGradientLightBlue,
                       ),
                       textColor: Colors.white,
                       title: 'Submit',
