@@ -7,27 +7,27 @@ class Constants {
     canvasColor: Color(0xFFF5F5F5),
     accentColor: Color(0xFF5063EE),
     primaryTextTheme: TextTheme(
-      headline3: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Questrial',
-        fontSize: 45,
-      ),
-      headline4: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Questrial',
-        fontSize: 30,
-      ),
-      headline5: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Questrial',
-        fontSize: 17,
-      ),
-      headline6: TextStyle(
-        color: Colors.black,
-        fontFamily: 'Questrial',
-        fontSize: 20,
-      ),
-    ),
+        headline3: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Questrial',
+          fontSize: 45,
+        ),
+        headline4: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Questrial',
+          fontSize: 30,
+        ),
+        headline5: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Questrial',
+          fontSize: 17,
+        ),
+        headline6: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Questrial',
+          fontSize: 20,
+        ),
+        bodyText1: TextStyle()),
   );
 
   static final kGradientLight = LinearGradient(
@@ -63,4 +63,6 @@ class RXKey {
 
   static const String password =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+
+  static const String dimension = r'^[0-9]+(.|,|)?[0-9]$';
 }

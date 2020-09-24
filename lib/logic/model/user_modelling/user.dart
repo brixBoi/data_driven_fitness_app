@@ -18,9 +18,9 @@ class User {
     initialized = false;
   }
 
-  void initializeUser(double height, double weight) {
+  void initializeUser(double height, double weight, UserGoals userGoal) {
     this.userStatistics = UserStatistics(height, weight, Set(), Set());
-    this.userRegime = UserRegime.blank();
+    this.userRegime = UserRegime.blank(userGoal);
   }
 
   int personId;

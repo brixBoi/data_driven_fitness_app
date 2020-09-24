@@ -3,6 +3,7 @@ import 'package:data_driven_fitness_app/logic/model/application_variables/Applic
 import 'package:data_driven_fitness_app/logic/model/application_variables/application_data.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard.dart';
+import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/login_signup_screen.dart';
 import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
           LoginSignupScreen.routeName: (context) =>
               LoginSignupScreen(appManager),
           SignupScreen.routeName: (context) => SignupScreen(),
+          FirstTimeUserScreen.routeName: (context) => FirstTimeUserScreen(),
         },
         initialRoute: appManager.getInitialRoute(),
         theme: Constants.kappLightTheme,

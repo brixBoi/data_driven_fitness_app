@@ -1,5 +1,6 @@
 import 'package:data_driven_fitness_app/constants.dart';
 import 'package:data_driven_fitness_app/custom_widgets/big_button.dart';
+import 'package:data_driven_fitness_app/custom_widgets/signup_field.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,8 @@ class _SignupFormState extends State<SignupForm> {
             regex: RXKey.name,
             errorText: 'Please enter a valid First Name',
             controller: firstNameController,
+            fieldColor: Colors.white70,
+            textEntryColor: Colors.white,
           ),
           FormDivider(),
           SignupField(
@@ -92,6 +95,8 @@ class _SignupFormState extends State<SignupForm> {
             regex: RXKey.name,
             errorText: 'Please enter a valid Last Name',
             controller: lastNameController,
+            fieldColor: Colors.white70,
+            textEntryColor: Colors.white,
           ),
           FormDivider(),
           SignupField(
@@ -100,6 +105,8 @@ class _SignupFormState extends State<SignupForm> {
             regex: RXKey.email,
             errorText: 'Please enter a valid Email',
             controller: emailController,
+            fieldColor: Colors.white70,
+            textEntryColor: Colors.white,
           ),
           FormDivider(),
           SignupField(
@@ -109,6 +116,8 @@ class _SignupFormState extends State<SignupForm> {
             regex: RXKey.password,
             errorText: 'Password too weak',
             controller: passwordController,
+            fieldColor: Colors.white70,
+            textEntryColor: Colors.white,
           ),
           SizedBox(
             height: 10,
@@ -173,55 +182,6 @@ class FormDivider extends StatelessWidget {
       width: 270,
       child: Divider(
         color: Colors.white60,
-      ),
-    );
-  }
-}
-
-class SignupField extends StatelessWidget {
-  const SignupField({
-    Key key,
-    this.label,
-    this.keyboardType,
-    this.obscureText,
-    @required this.errorText,
-    @required this.regex,
-    this.controller,
-  }) : super(key: key);
-
-  final TextInputType keyboardType;
-  final String label;
-  final bool obscureText;
-  final String errorText;
-  final String regex;
-  final TextEditingController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 90,
-      width: 270,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 12.0),
-        child: TextFormField(
-          controller: controller,
-          obscureText: (obscureText != null) ? obscureText : false,
-          style: TextStyle(color: Colors.white, fontSize: 20),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            labelStyle: TextStyle(color: Colors.white70),
-            labelText: label,
-            errorStyle: TextStyle(fontSize: 15, color: Colors.redAccent),
-          ),
-          keyboardType: keyboardType,
-          validator: (value) {
-            String output = null;
-            if (!RegExp(regex).hasMatch(value)) {
-              output = errorText;
-            }
-            return output;
-          },
-        ),
       ),
     );
   }

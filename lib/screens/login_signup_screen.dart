@@ -87,7 +87,7 @@ class LoginSignupScreen extends StatelessWidget {
                             title: 'Sign in with Social Media',
                             textColor: Theme.of(context).accentColor,
                             onPress: () {
-                              appManager.login(context);
+//                              appManager.login(context);
                             },
                           ),
                           SizedBox(
