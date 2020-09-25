@@ -1,6 +1,7 @@
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/exercise.dart';
 import 'package:flutter/material.dart';
 
+///class to log workout that has been completed
 class WorkoutLog {
   WorkoutLog(this.date, this.startTime, this.finishTime, this.exercises);
 

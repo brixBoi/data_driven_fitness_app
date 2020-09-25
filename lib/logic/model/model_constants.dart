@@ -1,3 +1,4 @@
+///enum of days of the week used for routines
 enum Days {
   MONDAY,
   TUESDAY,
@@ -7,7 +8,7 @@ enum Days {
   SATURDAY,
   SUNDAY,
 }
-
+///enum of different muscle groups exercises belong to
 enum MuscleGroups {
   LEGS,
   CHEST,
