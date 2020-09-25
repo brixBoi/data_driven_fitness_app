@@ -1,32 +1,41 @@
 import 'package:data_driven_fitness_app/constants.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
-import 'package:data_driven_fitness_app/screens/history_screen.dart';
-import 'package:data_driven_fitness_app/screens/login_signup_screen.dart';
-import 'package:data_driven_fitness_app/screens/stats_screen.dart';
-import 'package:data_driven_fitness_app/screens/workout_screen.dart';
+import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart';
+import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
+import 'package:data_driven_fitness_app/screens/login_or_signup_selection_screen.dart';
+import 'package:data_driven_fitness_app/screens/signin_user_screen.dart';
+import 'package:data_driven_fitness_app/screens/signup_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'screens/homescreen.dart';
 
 void main() => runApp(MyApp());
 
 UserData userData = UserData();
 ApplicationManager appManager = ApplicationManager(userData);
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (context) => userData,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => userData),
+        ChangeNotifierProvider(create: (context) => appManager),
+      ],
       child: MaterialApp(
         routes: {
-          HomeScreen.routeName: (context) => HomeScreen(),
-          LoginSignupScreen.routeName: (context) => LoginSignupScreen(),
-          StatsScreen.routeName: (context) => StatsScreen(),
-          WorkoutScreen.routeName: (context) => WorkoutScreen(),
-          HistoryScreen.routeName: (context) => HistoryScreen()
+          DashboardScreen.routeName: (context) => DashboardScreen(),
+          LoginOrSignupNavigationScreen.routeName: (context) =>
+              LoginOrSignupNavigationScreen(appManager),
+          SignupScreen.routeName: (context) => SignupScreen(),
+          FirstTimeUserScreen.routeName: (context) => FirstTimeUserScreen(),
+          SignInScreen.routeName: (context) => SignInScreen(),
         },
         initialRoute: appManager.getInitialRoute(),
         theme: Constants.kappLightTheme,
