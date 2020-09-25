@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'dashboard.dart';
+import 'dashboard_screen.dart';
 import 'navbar/navbar_constants.dart';
 
-/// Allows users to view/manage their workout stats
-class StatsScreen extends StatefulWidget {
-  // Constant for route navigation
-  static final DashboardTabItem tab = DashboardTabItem.STATS;
+/// Displayed when a user chooses to start a routine
+class WorkoutScreen extends StatefulWidget {
+  static final DashboardTabItem tab = DashboardTabItem.WORKOUT;
 
   @override
-  _StatsScreenState createState() => _StatsScreenState();
+  _WorkoutScreenState createState() => _WorkoutScreenState();
 
+  /// Builds and gets associated NavigatorButton for this tab
   static IconButton getTabButton(
       BuildContext context, DashboardTabItem currentTab, Function onPress) {
     Color color =
         (currentTab == tab) ? Theme.of(context).accentColor : Colors.black;
     return IconButton(
       icon: Icon(
-        Icons.show_chart,
+        Icons.fitness_center,
         color: color,
         size: NavbarConstants.size,
       ),
@@ -28,11 +28,11 @@ class StatsScreen extends StatefulWidget {
   }
 }
 
-class _StatsScreenState extends State<StatsScreen> {
+class _WorkoutScreenState extends State<WorkoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Stats Screen'),
+      child: Text('Workout Screen'),
     );
   }
 }

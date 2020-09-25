@@ -1,13 +1,15 @@
 import 'package:data_driven_fitness_app/constants.dart';
-import 'package:data_driven_fitness_app/custom_widgets/big_button.dart';
 import 'package:data_driven_fitness_app/custom_widgets/signup_field.dart';
+import 'package:data_driven_fitness_app/custom_widgets/stronk_custom_button.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+/// Allows user to signup to the application
 class SignupScreen extends StatelessWidget {
+  /// Static constant for route navigation
   static final routeName = '/signup_screen';
 
   @override
@@ -79,44 +81,44 @@ class _SignupFormState extends State<SignupForm> {
           Container(
             width: double.infinity,
           ),
-          SignupField(
+          StronkTextFormField(
             label: 'First Name',
             keyboardType: TextInputType.name,
             regex: RXKey.name,
             errorText: 'Please enter a valid First Name',
             controller: firstNameController,
-            fieldColor: Colors.white70,
+            labelTextColor: Colors.white70,
             textEntryColor: Colors.white,
           ),
           FormDivider(),
-          SignupField(
+          StronkTextFormField(
             label: 'Last Name',
             keyboardType: TextInputType.name,
             regex: RXKey.name,
             errorText: 'Please enter a valid Last Name',
             controller: lastNameController,
-            fieldColor: Colors.white70,
+            labelTextColor: Colors.white70,
             textEntryColor: Colors.white,
           ),
           FormDivider(),
-          SignupField(
+          StronkTextFormField(
             label: 'Email',
             keyboardType: TextInputType.emailAddress,
             regex: RXKey.email,
             errorText: 'Please enter a valid Email',
             controller: emailController,
-            fieldColor: Colors.white70,
+            labelTextColor: Colors.white70,
             textEntryColor: Colors.white,
           ),
           FormDivider(),
-          SignupField(
+          StronkTextFormField(
             label: 'Password',
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             regex: RXKey.password,
             errorText: 'Password too weak',
             controller: passwordController,
-            fieldColor: Colors.white70,
+            labelTextColor: Colors.white70,
             textEntryColor: Colors.white,
           ),
           SizedBox(
@@ -134,7 +136,7 @@ class _SignupFormState extends State<SignupForm> {
                   ),
                   visible: _showExistingEmailError,
                 ),
-                BigButton(
+                StronkFlatButton(
                   title: 'Submit',
                   textColor: Colors.white,
                   boxDecoration:

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'dashboard.dart';
+import 'dashboard_screen.dart';
 import 'navbar/navbar_constants.dart';
 
-/// Displayed when a user chooses to start a routine
-class WorkoutScreen extends StatefulWidget {
-  // Constant for route navigation
-  static final DashboardTabItem tab = DashboardTabItem.WORKOUT;
+/// Allows users to browse their workout history
+class HistoryTab extends StatefulWidget {
+  static final DashboardTabItem tab = DashboardTabItem.HISTORY;
 
   @override
-  _WorkoutScreenState createState() => _WorkoutScreenState();
+  _HistoryTabState createState() => _HistoryTabState();
 
+  /// Builds and gets associated NavigatorButton for this tab
   static IconButton getTabButton(
       BuildContext context, DashboardTabItem currentTab, Function onPress) {
     Color color =
         (currentTab == tab) ? Theme.of(context).accentColor : Colors.black;
     return IconButton(
       icon: Icon(
-        Icons.fitness_center,
+        Icons.calendar_today,
         color: color,
         size: NavbarConstants.size,
       ),
@@ -28,11 +28,11 @@ class WorkoutScreen extends StatefulWidget {
   }
 }
 
-class _WorkoutScreenState extends State<WorkoutScreen> {
+class _HistoryTabState extends State<HistoryTab> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Workout Screen'),
+      child: Text('History Screen'),
     );
   }
 }

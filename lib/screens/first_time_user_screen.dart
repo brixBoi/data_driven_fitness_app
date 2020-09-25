@@ -1,6 +1,7 @@
 import 'package:data_driven_fitness_app/constants.dart';
-import 'package:data_driven_fitness_app/custom_widgets/big_button.dart';
 import 'package:data_driven_fitness_app/custom_widgets/signup_field.dart';
+import 'package:data_driven_fitness_app/custom_widgets/stronk_custom_button.dart';
+import 'package:data_driven_fitness_app/custom_widgets/stronk_toggle_buttons.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,8 @@ class FirstTimeUserScreen extends StatefulWidget {
 
 class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
   GlobalKey<FormState> userFitnessForm = GlobalKey<FormState>();
-  GlobalKey<CustomToggleButtonsState> userTrainTypeToggle =
-      GlobalKey<CustomToggleButtonsState>();
+  GlobalKey<StronkToggleButtonsState> userTrainTypeToggle =
+      GlobalKey<StronkToggleButtonsState>();
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +64,14 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
                   key: userFitnessForm,
                   child: Column(
                     children: [
-                      SignupField(
+                      StronkTextFormField(
                         controller: widget.heightFieldontroller,
                         label: 'Your Height (cm)',
                         keyboardType: TextInputType.number,
                         regex: RXKey.dimension,
                         errorText: 'Enter a valid height (without unit)',
                       ),
-                      SignupField(
+                      StronkTextFormField(
                         controller: widget.weightFieldontroller,
                         label: 'Your Weight (kg)',
                         keyboardType: TextInputType.number,
@@ -78,18 +79,18 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
                         errorText: 'Enter a valid weight (without unit)',
                       ),
                       Text('I want to...'),
-                      CustomToggleButtons(
+                      StronkToggleButtons(
                         key: userTrainTypeToggle,
                         tiles: [
-                          CustomToggleButtonTile(
+                          StronkToggleButtonTile(
                             icon: Icons.fitness_center,
                             label: 'Bulk',
                           ),
-                          CustomToggleButtonTile(
+                          StronkToggleButtonTile(
                             icon: Icons.directions_run,
                             label: 'Cut',
                           ),
-                          CustomToggleButtonTile(
+                          StronkToggleButtonTile(
                             icon: Icons.help_outline,
                             label: 'Unsure',
                           ),
@@ -104,7 +105,7 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(30.0),
-                    child: BigButton(
+                    child: StronkFlatButton(
                       boxDecoration: BoxDecoration(
                         gradient: Constants.kGradientLightBlue,
                       ),
@@ -150,101 +151,6 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CustomToggleButtonTile {
-  CustomToggleButtonTile({this.icon, this.label});
-
-  final IconData icon;
-  final String label;
-}
-
-class CustomToggleButtons extends StatefulWidget {
-  const CustomToggleButtons({
-    Key key,
-    this.tiles,
-  }) : super(key: key);
-  final List<CustomToggleButtonTile> tiles;
-
-  @override
-  CustomToggleButtonsState createState() => CustomToggleButtonsState();
-}
-
-class CustomToggleButtonsState extends State<CustomToggleButtons> {
-  final double iconSize = 40;
-  final double iconPadding = 20;
-  int selectedButton;
-  List<CustomToggleButton> buttons = List<CustomToggleButton>();
-
-  void initButtons() {
-    buttons.clear();
-    var tiles = widget.tiles;
-    for (int i = 0; i < widget.tiles.length; i++) {
-      CustomToggleButtonTile tile = tiles[i];
-      buttons.add(
-        CustomToggleButton(
-          icon: tile.icon,
-          label: tile.label,
-          selected: i == selectedButton,
-          onPressed: () {
-            setState(() {
-              selectedButton = i;
-            });
-          },
-        ),
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    initButtons();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: buttons,
-    );
-  }
-}
-
-class CustomToggleButton extends StatelessWidget {
-  const CustomToggleButton({
-    Key key,
-    this.iconPadding,
-    this.iconSize,
-    @required this.selected,
-    @required this.icon,
-    this.onPressed,
-    this.label,
-  }) : super(key: key);
-
-  final double iconPadding;
-  final double iconSize;
-  final bool selected;
-  final IconData icon;
-  final Function onPressed;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all((iconPadding != null) ? iconPadding : 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            iconSize: (iconSize != null) ? iconSize : 40,
-            icon: Icon(
-              icon,
-              color: selected ? Theme.of(context).accentColor : Colors.black,
-            ),
-            onPressed: () => onPressed(),
-          ),
-          Text((label != null) ? label : ''),
-        ],
       ),
     );
   }

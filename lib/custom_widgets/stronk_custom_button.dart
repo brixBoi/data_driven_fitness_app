@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class BigButton extends StatelessWidget {
-  const BigButton({
+/// Custom button used throughout app for important operations, e.g. signing in, submitting a form etc
+class StronkFlatButton extends StatelessWidget {
+  const StronkFlatButton({
     Key key,
     @required this.title,
     this.boxDecoration,
@@ -18,19 +19,24 @@ class BigButton extends StatelessWidget {
 
   final height;
   final width;
+  final defaultHeight = 50.0;
+  final defaultWidth = 250.0;
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       padding: EdgeInsets.all(0.0),
+      //Make button transparent so decoration can be seen
       color: Colors.transparent,
       child: Ink(
-        height: (height != null) ? height : 50,
-        width: (width != null) ? width : 250,
+        // Use given height if specified, otherwise the default height
+        height: (height != null) ? height : defaultHeight,
+        width: (width != null) ? width : defaultWidth,
         decoration: boxDecoration,
         child: Container(
-          height: (height != null) ? height : 50,
-          width: (width != null) ? width : 250,
+          height: (height != null) ? height : defaultHeight,
+          width: (width != null) ? width : defaultWidth,
+          // Minimum / max constraints so Text is always visible
           constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
           alignment: Alignment.center,
           child: Text(
@@ -41,22 +47,9 @@ class BigButton extends StatelessWidget {
         ),
       ),
       onPressed: () {
+        // Run function given in constructor
         onPress();
       },
     );
   }
 }
-
-//SizedBox(
-//height: (height != null) ? height : 50,
-//width: (width != null) ? width : 250,
-//child: Container(
-//child: Center(
-//child: Text(
-//title,
-//style: TextStyle(color: textColor, fontSize: 18),
-//),
-//),
-//decoration: boxDecoration,
-//),
-//),

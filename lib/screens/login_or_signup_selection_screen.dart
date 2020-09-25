@@ -1,4 +1,4 @@
-import 'package:data_driven_fitness_app/custom_widgets/big_button.dart';
+import 'package:data_driven_fitness_app/custom_widgets/stronk_custom_button.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
 import 'package:data_driven_fitness_app/screens/signin_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/signup_screen.dart';
@@ -8,10 +8,16 @@ import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 import '../constants.dart';
 
-class LoginSignupScreen extends StatelessWidget {
+// TODO: Further document code
+
+/// Shown if no user is logged
+///
+/// Allows user to login or signup
+class LoginOrSignupNavigationScreen extends StatelessWidget {
+  /// Static constant for route navigation
   static const String routeName = "/login_signup_screen";
 
-  LoginSignupScreen(this.appManager);
+  LoginOrSignupNavigationScreen(this.appManager);
 
   ApplicationManager appManager;
 
@@ -70,7 +76,7 @@ class LoginSignupScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          BigButton(
+                          StronkFlatButton(
                             boxDecoration: BoxDecoration(
                                 gradient: Constants.kGradientLightBlue),
                             title: 'Signup',
@@ -83,7 +89,7 @@ class LoginSignupScreen extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          BigButton(
+                          StronkFlatButton(
                             boxDecoration: BoxDecoration(border: Border.all()),
                             title: 'Sign in with Social Media',
                             textColor: Theme.of(context).accentColor,

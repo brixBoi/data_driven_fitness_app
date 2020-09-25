@@ -102,13 +102,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  primitive_wrappers:
-    dependency: "direct main"
-    description:
-      name: primitive_wrappers
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1"
   provider:
     dependency: "direct main"
     description:
