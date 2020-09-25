@@ -2,12 +2,19 @@ import 'package:data_driven_fitness_app/logic/model/completed_activities/workout
 
 import 'exercise_statistic.dart';
 
+///class to hold user statistics
+///
+/// contains their personal stats
+/// and exercise and lift stats
 class UserStatistics {
   UserStatistics(
       this.height, this.weight, this.workoutLogs, this.exerciseStats);
 
   double height;
   double weight;
+
+  //
   Set<WorkoutLog> workoutLogs;
+  //
   Set<ExerciseStatistic> exerciseStats;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../model_constants.dart';
 
+/// class to create a new exercise
 class Exercise {
   /// Constructs a new exercise object
   Exercise(this.name, this.description, this.image, this.muscleGroup);
