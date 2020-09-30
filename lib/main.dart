@@ -12,10 +12,23 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
-UserData userData = UserData();
-ApplicationManager appManager = ApplicationManager(userData);
-
 class MyApp extends StatefulWidget {
+  MyApp({
+    this.testingRoute,
+    UserData userData,
+  }) {
+    if (userData == null) {
+      this.userData = UserData();
+    } else {
+      this.userData = userData;
+    }
+    this.appManager = ApplicationManager(userData);
+  }
+
+  ApplicationManager appManager;
+  UserData userData;
+  String testingRoute;
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -23,12 +36,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    UserData userData = widget.userData;
+    ApplicationManager appManager = widget.appManager;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => userData),
         ChangeNotifierProvider(create: (context) => appManager),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           DashboardScreen.routeName: (context) => DashboardScreen(),
           LoginOrSignupNavigationScreen.routeName: (context) =>
@@ -37,7 +54,9 @@ class _MyAppState extends State<MyApp> {
           FirstTimeUserScreen.routeName: (context) => FirstTimeUserScreen(),
           SignInScreen.routeName: (context) => SignInScreen(),
         },
-        initialRoute: appManager.getInitialRoute(),
+        initialRoute: widget.testingRoute != null
+            ? widget.testingRoute
+            : appManager.getInitialRoute(),
         theme: Constants.kappLightTheme,
       ),
     );

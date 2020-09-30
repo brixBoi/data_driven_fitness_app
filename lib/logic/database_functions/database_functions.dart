@@ -14,7 +14,6 @@ class DatabaseFunctions {
       return sampleUser;
     } else {
       throw invalidEmailorPass;
-      return null;
     }
   }
 
@@ -36,9 +35,9 @@ class DatabaseFunctions {
     bool output = false;
     if (password.isNotEmpty) {
       output = true;
+    }
+    return output;
   }
-  return output;
-}
 
   /// Temp function for testing
   ///
@@ -55,9 +54,6 @@ class DatabaseFunctions {
       return false;
     }
   }
-
-
-
 
   /// Temp function for testing
   ///
