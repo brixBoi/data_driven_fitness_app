@@ -62,6 +62,15 @@ class Constants {
       Color(0xFFEF7656),
     ],
   );
+  static final kBackgroundGradientGreen = LinearGradient(
+//    stops: [0.1, 0.4, 0.7, 1.0],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0xFF69E6A4),
+      Color(0xFF40A176),
+    ],
+  );
 }
 
 class RXKey {
