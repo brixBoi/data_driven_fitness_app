@@ -6,8 +6,8 @@ import 'package:data_driven_fitness_app/screens/dashboard/stats_tab.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/workout_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:data_driven_fitness_app/screens/calculator_screens/tdee_input_screen.dart';
-import 'package:data_driven_fitness_app/screens/calculator_screens/bmi_input_screen.dart';
+import 'package:data_driven_fitness_app/screens/calculators/tdee_input_screen.dart';
+import 'package:data_driven_fitness_app/screens/calculators/bmi_input_screen.dart';
 
 /// Enum for each tab displayed in DashboardScreen
 enum DashboardTabItem { HOME, STATS, WORKOUT, HISTORY }

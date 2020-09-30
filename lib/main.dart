@@ -1,8 +1,8 @@
 import 'package:data_driven_fitness_app/constants.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
-import 'package:data_driven_fitness_app/screens/calculator_screens/bmi_input_screen.dart';
-import 'package:data_driven_fitness_app/screens/calculator_screens/tdee_input_screen.dart';
+import 'package:data_driven_fitness_app/screens/calculators/bmi_input_screen.dart';
+import 'package:data_driven_fitness_app/screens/calculators/tdee_input_screen.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart';
 import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/login_or_signup_selection_screen.dart';

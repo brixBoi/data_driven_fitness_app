@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'reusable_card.dart';
 import 'package:data_driven_fitness_app/constants.dart';
+import 'bottom_container.dart';
+import 'calculator_constants.dart';
 
 class ResultsScreen extends StatelessWidget {
 
@@ -153,26 +155,12 @@ class ResultsScreen extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
+          BottomContainer(
+            title: 'RECALCULATE',
+            gradient: Constants.kBackgroundGradientOrange,
+            onTouch: (){
+              Navigator.of(context).pop();
             },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'RECALCULATE',
-                  style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
-                ),
-              ),
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: bottomContainerColour,
-                gradient: Constants.kBackgroundGradientOrange,
-              ),
-              width: double.infinity,
-              height: bottomContainerHeight,
-            ),
           )
         ],
       ),

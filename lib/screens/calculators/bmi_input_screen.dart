@@ -1,12 +1,15 @@
-import 'package:data_driven_fitness_app/screens/calculator_screens/bmi_results_screen.dart';
+import 'package:data_driven_fitness_app/screens/calculators/bottom_container.dart';
 import 'package:flutter/material.dart';
 import 'reusable_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'calculator_brain.dart';
 import 'package:data_driven_fitness_app/constants.dart';
+import 'package:data_driven_fitness_app/screens/calculators/calculator_brain.dart';
+import 'package:data_driven_fitness_app/screens/calculators/bmi_results_screen.dart';
+import 'round_icon_button.dart';
+import 'calculator_constants.dart';
+
 
 class BMIInputScreen extends StatefulWidget {
-
   static const String routeName = "/bmi_input_screen";
 
   @override
@@ -14,9 +17,10 @@ class BMIInputScreen extends StatefulWidget {
 }
 
 class _BMIInputScreenState extends State<BMIInputScreen> {
-  int height = 180;
-  int weight = 70;
-  int age = 25;
+  //initializing displayed values to somewhat average for ease of use
+  int height = calcHeight;
+  int weight = calcWeight;
+  int age = calcAge;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,8 @@ class _BMIInputScreenState extends State<BMIInputScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SizedBox(
-            width: double.infinity, height: 30,
+            width: double.infinity,
+            height: 30,
           ),
           Expanded(
             flex: 2,
@@ -48,35 +53,44 @@ class _BMIInputScreenState extends State<BMIInputScreen> {
                     children: <Widget>[
                       Text(
                         'HEIGHT',
-                        style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                        style: Theme.of(context)
+                            .primaryTextTheme
+                            .headline5
+                            .apply(color: Theme.of(context).backgroundColor),
                       ),
                       SizedBox(
                         width: 15.0,
                       ),
                       Text(
                         height.toString(),
-                        style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                        style: Theme.of(context)
+                            .primaryTextTheme
+                            .headline4
+                            .apply(color: Theme.of(context).backgroundColor),
                       ),
                       Text(
                         'cm',
-                        style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                        style: Theme.of(context)
+                            .primaryTextTheme
+                            .headline5
+                            .apply(color: Theme.of(context).backgroundColor),
                       ),
                     ],
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      activeTrackColor: Colors.white70,
-                      inactiveTrackColor: Colors.grey[700],
-                      thumbColor: Colors.blueGrey,
-                      overlayColor: Color(0x29C5CAE9),
+                      activeTrackColor: onTrackColour,
+                      inactiveTrackColor: offTrackColour,
+                      thumbColor: slideThumbColour,
+                      overlayColor: slideOverlayColour,
                       thumbShape:
-                          RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                      overlayShape: RoundSliderOverlayShape(overlayRadius: 27),
+                          RoundSliderThumbShape(enabledThumbRadius: slideThumbSize),
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: slideOverlaySize),
                     ),
                     child: Slider(
                       value: height.toDouble(),
-                      min: 130,
-                      max: 230,
+                      min: heightSlideMin,
+                      max: heightSlideMax,
                       onChanged: (double newValue) {
                         setState(() {
                           height = newValue.toInt();
@@ -102,20 +116,33 @@ class _BMIInputScreenState extends State<BMIInputScreen> {
                       children: <Widget>[
                         Text(
                           'WEIGHT',
-                          style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .headline5
+                              .apply(color: Theme.of(context).backgroundColor),
                         ),
-                        SizedBox(height: 10.0,),
+                        SizedBox(
+                          height: 10.0,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               weight.toString(),
-                              style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .headline4
+                                  .apply(
+                                      color: Theme.of(context).backgroundColor),
                             ),
                             Text(
                               'kg',
-                              style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .headline5
+                                  .apply(
+                                      color: Theme.of(context).backgroundColor),
                             ),
                           ],
                         ),
@@ -158,20 +185,33 @@ class _BMIInputScreenState extends State<BMIInputScreen> {
                       children: <Widget>[
                         Text(
                           'AGE',
-                          style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .headline5
+                              .apply(color: Theme.of(context).backgroundColor),
                         ),
-                        SizedBox(height: 10.0,),
+                        SizedBox(
+                          height: 10.0,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               age.toString(),
-                              style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .headline4
+                                  .apply(
+                                      color: Theme.of(context).backgroundColor),
                             ),
                             Text(
                               'yr',
-                              style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .headline5
+                                  .apply(
+                                      color: Theme.of(context).backgroundColor),
                             ),
                           ],
                         ),
@@ -208,39 +248,29 @@ class _BMIInputScreenState extends State<BMIInputScreen> {
             ),
           ),
           SizedBox(
-            width: double.infinity, height: 200,
+            width: double.infinity,
+            height: 200,
           ),
-          GestureDetector(
-            onTap: () {
+          BottomContainer(
+            title: 'CALCULATOR',
+            gradient: Constants.kBackgroundGradientGreen,
+            onTouch: () {
               CalculatorBrain brain = new CalculatorBrain(
-                  height: height,
-                  weight: weight,);
+                height: height,
+                weight: weight,
+              );
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BMIResultsScreen(
-                        bmiValue: brain.calculateBMI(),
-                        bmiResult: brain.getBMICategory(),
-                        bmiDescription: brain.getBMIExplanation(),
-                        bmiLevel: brain.getBMIColour(),
-                      )));
-            },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'CALCULATE',
-                  style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BMIResultsScreen(
+                    bmiValue: brain.calculateBMI(),
+                    bmiResult: brain.getBMICategory(),
+                    bmiDescription: brain.getBMIExplanation(),
+                    bmiLevel: brain.getBMIColour(),
+                  ),
                 ),
-              ),
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: bottomContainerColour,
-                gradient: Constants.kBackgroundGradientGreen,
-              ),
-              width: double.infinity,
-              height: bottomContainerHeight,
-            ),
+              );
+            },
           )
         ],
       ),

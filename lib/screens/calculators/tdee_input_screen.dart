@@ -5,10 +5,11 @@ import 'icon_content.dart';
 import 'calculator_brain.dart';
 import 'tdee_results_screen.dart';
 import 'package:data_driven_fitness_app/constants.dart';
-
+import 'package:data_driven_fitness_app/screens/calculators/bottom_container.dart';
+import 'calculator_constants.dart';
+import 'round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
-
   static const String routeName = "/tdee_input_screen";
 
   @override
@@ -17,16 +18,12 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender chosenGender;
-  int height = 180;
-  int weight = 70;
-  int age = 25;
-  List<String> activityLevel = [
-    'Sedentary',
-    'Lightly Active',
-    'Moderately Active',
-    'Very Active'
-  ];
-  int activityLevelNumber = 2;
+  int height = calcHeight;
+  int weight = calcWeight;
+  int age = calcAge;
+
+  List<String> activityLevel = activeTypes;
+  int activityLevelNumber = calcActivePosition;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +48,7 @@ class _InputPageState extends State<InputPage> {
                       },
                       colour: chosenGender == Gender.male
                           ? Theme.of(context).accentColor
-                          : inActiveCardColour,
+                          : baseColour,
                       gradient: chosenGender == Gender.male
                           ? Constants.kGradientLightBlue
                           : null,
@@ -70,7 +67,7 @@ class _InputPageState extends State<InputPage> {
                       },
                       colour: chosenGender == Gender.female
                           ? Theme.of(context).accentColor
-                          : inActiveCardColour,
+                          : baseColour,
                       gradient: chosenGender == Gender.female
                           ? Constants.kGradientLightBlue
                           : null,
@@ -99,36 +96,45 @@ class _InputPageState extends State<InputPage> {
                       children: <Widget>[
                         Text(
                           'HEIGHT',
-                          style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .headline5
+                              .apply(color: Theme.of(context).backgroundColor),
                         ),
                         SizedBox(
                           width: 15.0,
                         ),
                         Text(
                           height.toString(),
-                          style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .headline4
+                              .apply(color: Theme.of(context).backgroundColor),
                         ),
                         Text(
                           'cm',
-                          style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .headline5
+                              .apply(color: Theme.of(context).backgroundColor),
                         ),
                       ],
                     ),
                     SliderTheme(
                       data: SliderTheme.of(context).copyWith(
-                        activeTrackColor: Colors.white70,
-                        inactiveTrackColor: Colors.grey[700],
-                        thumbColor: Colors.blueGrey,
-                        overlayColor: Color(0x29C5CAE9),
+                        activeTrackColor: onTrackColour,
+                        inactiveTrackColor: offTrackColour,
+                        thumbColor: slideThumbColour,
+                        overlayColor: slideOverlayColour,
                         thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                            RoundSliderThumbShape(enabledThumbRadius: slideThumbSize),
                         overlayShape:
-                            RoundSliderOverlayShape(overlayRadius: 27),
+                            RoundSliderOverlayShape(overlayRadius: slideOverlaySize),
                       ),
                       child: Slider(
                         value: height.toDouble(),
-                        min: 130,
-                        max: 230,
+                        min: heightSlideMin,
+                        max: heightSlideMax,
                         onChanged: (double newValue) {
                           setState(() {
                             height = newValue.toInt();
@@ -151,7 +157,10 @@ class _InputPageState extends State<InputPage> {
                   children: <Widget>[
                     Text(
                       'ACTIVITY LEVEL',
-                      style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                      style: Theme.of(context)
+                          .primaryTextTheme
+                          .headline5
+                          .apply(color: Theme.of(context).backgroundColor),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -173,7 +182,10 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           activityLevel[activityLevelNumber],
-                          style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                          style: Theme.of(context)
+                              .primaryTextTheme
+                              .headline4
+                              .apply(color: Theme.of(context).backgroundColor),
                         ),
                         SizedBox(
                           width: 7.5,
@@ -208,7 +220,11 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text(
                             'WEIGHT',
-                            style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                            style: Theme.of(context)
+                                .primaryTextTheme
+                                .headline5
+                                .apply(
+                                    color: Theme.of(context).backgroundColor),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -216,11 +232,21 @@ class _InputPageState extends State<InputPage> {
                             children: [
                               Text(
                                 weight.toString(),
-                                style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .headline4
+                                    .apply(
+                                        color:
+                                            Theme.of(context).backgroundColor),
                               ),
                               Text(
                                 'kg',
-                                style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .headline5
+                                    .apply(
+                                        color:
+                                            Theme.of(context).backgroundColor),
                               ),
                             ],
                           ),
@@ -263,7 +289,11 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text(
                             'AGE',
-                            style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                            style: Theme.of(context)
+                                .primaryTextTheme
+                                .headline5
+                                .apply(
+                                    color: Theme.of(context).backgroundColor),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -271,11 +301,21 @@ class _InputPageState extends State<InputPage> {
                             children: [
                               Text(
                                 age.toString(),
-                                style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .headline4
+                                    .apply(
+                                        color:
+                                            Theme.of(context).backgroundColor),
                               ),
                               Text(
                                 'yr',
-                                style: Theme.of(context).primaryTextTheme.headline5.apply(color: Theme.of(context).backgroundColor),
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .headline5
+                                    .apply(
+                                        color:
+                                            Theme.of(context).backgroundColor),
                               ),
                             ],
                           ),
@@ -311,43 +351,29 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                CalculatorBrain brain = new CalculatorBrain(
-                    height: height,
-                    weight: weight,
-                    age: age,
-                    gender: chosenGender,
-                    activityLevel: activityLevelNumber);
-                Navigator.push(
+            BottomContainer(
+              title: 'CALCULATOR',
+              gradient: Constants.kBackgroundGradientGreen,
+              onTouch: () {
+                  CalculatorBrain brain = new CalculatorBrain(
+                      height: height,
+                      weight: weight,
+                      age: age,
+                      gender: chosenGender,
+                      activityLevel: activityLevelNumber);
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ResultsScreen(
-                              bmrResult: brain.calculateBMR(),
-                              tdeeResult: brain.calculateTDEE(),
-                              tweeResult: brain.calculateTWEE(),
-                            )));
+                      builder: (context) => ResultsScreen(
+                        bmrResult: brain.calculateBMR(),
+                        tdeeResult: brain.calculateTDEE(),
+                        tweeResult: brain.calculateTWEE(),
+                      ),
+                    ),
+                  );
               },
-              child: Container(
-                child: Center(
-                  child: Text(
-                    'CALCULATE',
-                    style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
-                  ),
-                ),
-                margin: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: bottomContainerColour,
-                  gradient: Constants.kBackgroundGradientGreen,
-                ),
-                width: double.infinity,
-                height: bottomContainerHeight,
-              ),
             )
           ],
         ));
   }
 }
-
-

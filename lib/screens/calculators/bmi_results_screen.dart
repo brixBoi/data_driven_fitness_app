@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'reusable_card.dart';
 import 'package:data_driven_fitness_app/constants.dart';
+import 'bottom_container.dart';
 
 class BMIResultsScreen extends StatelessWidget {
+
+  //constructor to ensure all required values are passed through when called
   BMIResultsScreen({@required this.bmiResult, @required this.bmiValue, @required this.bmiDescription, @required this.bmiLevel});
 
   final String bmiResult;
@@ -76,26 +79,12 @@ class BMIResultsScreen extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
+          BottomContainer(
+            title: 'RECALCULATE',
+            gradient: Constants.kBackgroundGradientOrange,
+            onTouch: (){
+              Navigator.of(context).pop();
             },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'RECALCULATE',
-                  style: Theme.of(context).primaryTextTheme.headline4.apply(color: Theme.of(context).backgroundColor),
-                ),
-              ),
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: bottomContainerColour,
-                gradient: Constants.kBackgroundGradientOrange,
-              ),
-              width: double.infinity,
-              height: bottomContainerHeight,
-            ),
           ),
         ],
       ),
