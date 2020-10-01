@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 //temporary constants to be changed to conform with app theme
-//constants to be put in constant folder
-//const activeCardColour = Theme.of(context).accentColor;
+//todo: constants to be put in constant folder
+
 const baseColour = Color(0xFFB2BBFB);
 
 

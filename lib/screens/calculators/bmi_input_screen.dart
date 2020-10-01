@@ -8,7 +8,12 @@ import 'package:data_driven_fitness_app/screens/calculators/bmi_results_screen.d
 import 'round_icon_button.dart';
 import 'calculator_constants.dart';
 
-
+///BMI calculator screen for a user to input data
+///
+///allows user to set values of height, weight and age through custom widgets
+///
+///contains 3 reusable card custom widgets responsible for taking user input
+///and a bottom big button custom widget to calculate and push to respective results page
 class BMIInputScreen extends StatefulWidget {
   static const String routeName = "/bmi_input_screen";
 

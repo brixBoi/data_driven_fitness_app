@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'calculator_constants.dart';
 
-
+///reusable widget to set an icon with consistent size and colour
 class IconContent extends StatelessWidget {
   final IconData icon;
-  final String text;
 
-  IconContent({this.icon, this.text});
+  IconContent({this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +17,6 @@ class IconContent extends StatelessWidget {
           size: iconSize,
           color: Theme.of(context).backgroundColor,
         ),
-        // SizedBox(
-        //   height: spacing,
-        // ),
-        // Text(
-        //   text,
-        //   style: textsTextStyle,
-        // ),
       ],
     );
   }

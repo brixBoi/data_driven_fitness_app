@@ -2,6 +2,9 @@ import 'calculator_constants.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+///class responsible for performing calculations and returning
+///results associated with those calculations for the BMI
+///and TDEE calculators
 class CalculatorBrain {
 
   CalculatorBrain(
@@ -17,12 +20,16 @@ class CalculatorBrain {
   double _tdee;
   double _bmi;
 
+  ///function to calculate BMR and return it to one decimal place as a String
+  ///using the st mifflin Jeor equation
   String calculateBMR() {
     int s = (gender == Gender.male) ? 5 : -161;
     _bmr = (10 * weight) + (6.25 * height) - (5 * age) + s;
     return _bmr.toStringAsFixed(1);
   }
 
+  ///function to calculate TDEE and return it to one decimal place as a String
+  ///by multiplying active rate that is based on selected activity level
   String calculateTDEE() {
     double activeRate;
     if (activityLevel == 0) {
@@ -41,16 +48,20 @@ class CalculatorBrain {
     return _tdee.toStringAsFixed(1);
   }
 
+  ///function to calculate TWEE and return it to one decimal place as a String
+  ///by multiplying TDEE by the number of days in a week
   String calculateTWEE() {
     double twee = _tdee * 7;
     return twee.toStringAsFixed(1);
   }
 
+  ///function to calculate BMI and return it to one decimal place as a String
   String calculateBMI() {
     _bmi = weight / pow((height / 100), 2);
     return _bmi.toStringAsFixed(1);
   }
 
+  ///function to determine what category/health class a BMI indicates
   String getBMICategory() {
     if (_bmi < 18.5) {
       return 'Underweight';
@@ -65,6 +76,8 @@ class CalculatorBrain {
     }
   }
 
+  ///function to return what a BMI value means to users and recommendations on what
+  ///to do about it
   String getBMIExplanation() {
     if (_bmi < 18.5) {
       return 'You are underweight. Being underweight can damage your health and it is recommended to see your local gp to find any underlying causes and formulate a plan to raise your weight healthily';
@@ -79,6 +92,8 @@ class CalculatorBrain {
     }
   }
 
+  ///returns colour to be used for BMI value and Category display.
+  ///this is to add to the sense of severity of a BMI value
   Color getBMIColour(){
     if (_bmi < 18.5) {
       return Colors.deepOrange[700];

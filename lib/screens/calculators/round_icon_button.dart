@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+///Custom widget to create a round button with an icon that performs an
+///action when tapped
+///also ensures all buttons have the same properties visually
 class RoundIconButton extends StatelessWidget {
+
+  ///requires Icon data and some function
   RoundIconButton({@required this.icon, @required this.onTouch});
 
   final IconData icon;

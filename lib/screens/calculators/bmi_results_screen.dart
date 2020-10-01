@@ -3,6 +3,11 @@ import 'reusable_card.dart';
 import 'package:data_driven_fitness_app/constants.dart';
 import 'bottom_container.dart';
 
+///BMI Calculator Screen for displaying users BMI, BMI description
+///and recommendations based on values passed from Input Screen
+///
+///contains 2 custom widgets: a reusable card to display the information and
+///a bottom big button to allow user to go back to input screen to perform more calculations
 class BMIResultsScreen extends StatelessWidget {
 
   //constructor to ensure all required values are passed through when called

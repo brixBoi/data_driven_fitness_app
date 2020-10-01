@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+///Reusable card widget that can be used as a base for icons, user input fields,
+///displaying resulting data and information
+///
+/// keeps them visually synchronous using edge insets and box shadows
 class ReusableCard extends StatelessWidget {
   final Color colour;
   final Widget cardChild;

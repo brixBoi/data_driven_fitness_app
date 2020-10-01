@@ -9,6 +9,12 @@ import 'package:data_driven_fitness_app/screens/calculators/bottom_container.dar
 import 'calculator_constants.dart';
 import 'round_icon_button.dart';
 
+///TDEE calculator screen for a user to input data
+///
+///allows user to set values of height, weight, age, gender and activity level
+///
+///contains 5 reusable card custom widgets responsible for taking user input
+///and a bottom container custom widget to calculate and push to respective results page
 class InputPage extends StatefulWidget {
   static const String routeName = "/tdee_input_screen";
 
@@ -17,6 +23,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  //initializing values
   Gender chosenGender;
   int height = calcHeight;
   int weight = calcWeight;

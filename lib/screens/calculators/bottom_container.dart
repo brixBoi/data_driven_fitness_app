@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'calculator_constants.dart';
 
+///A large reusable button that performs an action when tapped
 class BottomContainer extends StatelessWidget {
+
+  ///requires the text displayed on the button, a function to occur when button is touched,
+  ///and gradient of colours for the background
   const BottomContainer({
     @required this.title,
     @required this.onTouch,

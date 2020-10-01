@@ -5,6 +5,11 @@ import 'package:data_driven_fitness_app/constants.dart';
 import 'bottom_container.dart';
 import 'calculator_constants.dart';
 
+///TDEE Calculator Screen for displaying users BMR, TDEE and TWEE
+///based on values passed from Input Screen, as well as their descriptions
+///
+///contains 4 custom widgets: 3 reusable cards to display the information and
+///a bottom container to allow user to go back to input screen to perform more calculations
 class ResultsScreen extends StatelessWidget {
 
   ResultsScreen({@required this.bmrResult,@required this.tdeeResult,@required this.tweeResult});
