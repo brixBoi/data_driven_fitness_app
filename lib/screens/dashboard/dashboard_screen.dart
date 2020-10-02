@@ -1,5 +1,7 @@
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
+import 'package:data_driven_fitness_app/screens/calculators/bmi_input_screen.dart';
+import 'package:data_driven_fitness_app/screens/calculators/tdee_input_screen.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/history_tab.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/home_tab.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/navbar/bottom_navbar.dart';
@@ -8,8 +10,6 @@ import 'package:data_driven_fitness_app/screens/dashboard/workout_tab.dart';
 import 'package:data_driven_fitness_app/screens/profile_information.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:data_driven_fitness_app/screens/calculators/tdee_input_screen.dart';
-import 'package:data_driven_fitness_app/screens/calculators/bmi_input_screen.dart';
 
 /// Enum for each tab displayed in DashboardScreen
 enum DashboardTabItem { HOME, STATS, WORKOUT, HISTORY }
@@ -46,7 +46,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     //ensures the calculator dropdown is null when screen is built
     String _selectedCalculator;
     // Prevents returning to previous screen
@@ -88,6 +87,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 }
+
 List<DropdownMenuItem<String>> _dropDownItem() {
   List<String> calculatorList = [
     "TDEE",
@@ -103,6 +103,8 @@ List<DropdownMenuItem<String>> _dropDownItem() {
         ),
       )
       .toList();
+}
+
 class StronkDrawer extends StatelessWidget {
   const StronkDrawer({
     Key key,
@@ -113,6 +115,7 @@ class StronkDrawer extends StatelessWidget {
     ApplicationManager appManager = Provider.of<ApplicationManager>(context);
     User currentUser = appManager.userData.loggedInUser;
     final Key profileButtonKey = Key('profileButton');
+    String _selectedCalculator;
     return Drawer(
       child: Column(
         children: [
@@ -156,26 +159,25 @@ class StronkDrawer extends StatelessWidget {
             },
           ),
           DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  value: _selectedCalculator,
-                  items: _dropDownItem(),
-                  onChanged: (value){
-                    _selectedCalculator = value;
-                    switch (value){
-                      case "TDEE":
-                        Navigator.of(context).pop();
-                        Navigator.of(context)
-                            .pushNamed(InputPage.routeName);
-                        break;
-                      case "BMI":
-                        Navigator.of(context).pop();
-                        Navigator.of(context)
-                            .pushNamed(BMIInputScreen.routeName);
-                        break;
-                    }
-                  },
-                  hint: Text('Calculators'),
-                ),
+            child: DropdownButton(
+              value: _selectedCalculator,
+              items: _dropDownItem(),
+              onChanged: (value) {
+                _selectedCalculator = value;
+                switch (value) {
+                  case "TDEE":
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed(InputPage.routeName);
+                    break;
+                  case "BMI":
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed(BMIInputScreen.routeName);
+                    break;
+                }
+              },
+              hint: Text('Calculators'),
+            ),
+          )
         ],
       ),
     );
