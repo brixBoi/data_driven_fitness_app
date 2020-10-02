@@ -2,8 +2,6 @@ import 'package:data_driven_fitness_app/custom_widgets/signup_field.dart';
 import 'package:data_driven_fitness_app/custom_widgets/stronk_custom_button.dart';
 import 'package:data_driven_fitness_app/custom_widgets/stronk_toggle_buttons.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
-import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
-import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.dart';
 import 'package:data_driven_fitness_app/main.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/home_tab.dart';
@@ -11,18 +9,10 @@ import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/signin_user_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'testing_mocks_and_sample_data.dart';
+
 void main() {
   // Sample userdata for testing
-  UserData getSampleUserData() {
-    UserData sampleUserData = UserData();
-    sampleUserData.setLoggedInUser(User.blank(
-      1,
-      "zachmartin9001@gmail.com",
-      "Zach",
-      "Martin",
-    ));
-    return sampleUserData;
-  }
 
   testWidgets('FirstTimeUserScreen shown on first use',
       (WidgetTester tester) async {
@@ -57,7 +47,7 @@ void main() {
     // Initialize app and start from FirstTimeUserScreen with sample userData
     final MyApp app = MyApp(
       testingRoute: FirstTimeUserScreen.routeName,
-      userData: getSampleUserData(),
+      userData: MocksAndSampleData.createUninitializedUserData(),
     );
     // Pump app
     await tester.pumpWidget(app);
@@ -86,7 +76,7 @@ void main() {
     // Initialize app and start from FirstTimeUserScreen with sample userData
     final MyApp app = MyApp(
       testingRoute: FirstTimeUserScreen.routeName,
-      userData: getSampleUserData(),
+      userData: MocksAndSampleData.createUninitializedUserData(),
     );
 
     // Pump app
@@ -114,7 +104,7 @@ void main() {
   });
 
   test('App saves user height, weight and goal successfully', () {
-    var sampleUserData = getSampleUserData();
+    var sampleUserData = MocksAndSampleData.createUninitializedUserData();
     ApplicationManager appManager = ApplicationManager(sampleUserData);
     // Create sample builder to pass dummy context to appManager
     // This is required since the appManager will try to push the next screen

@@ -4,6 +4,7 @@ import 'package:data_driven_fitness_app/logic/model/application_variables/user_d
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart';
 import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/login_or_signup_selection_screen.dart';
+import 'package:data_driven_fitness_app/screens/profile_information.dart';
 import 'package:data_driven_fitness_app/screens/signin_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatefulWidget {
     } else {
       this.userData = userData;
     }
-    this.appManager = ApplicationManager(userData);
+    this.appManager = ApplicationManager(this.userData);
   }
 
   ApplicationManager appManager;
@@ -53,6 +54,8 @@ class _MyAppState extends State<MyApp> {
           SignupScreen.routeName: (context) => SignupScreen(),
           FirstTimeUserScreen.routeName: (context) => FirstTimeUserScreen(),
           SignInScreen.routeName: (context) => SignInScreen(),
+          ProfileInformationScreen.routeName: (context) =>
+              ProfileInformationScreen(),
         },
         initialRoute: widget.testingRoute != null
             ? widget.testingRoute
