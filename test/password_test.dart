@@ -7,7 +7,7 @@ import 'package:data_driven_fitness_app/logic/database_functions/database_functi
 void main() {
   test('Password Not Empty Test', () {
     final databaseFunctions = DatabaseFunctions();
-    final password = 'password'; /// we know this is a valid pass
+    final password = 'Password!123'; /// we know this is a valid pass
 
     expect(databaseFunctions.checkPasswordNotEmpty(password), true);
     expect(databaseFunctions.checkPasswordNotEmpty(''), false);
