@@ -106,9 +106,8 @@ void main() {
   test('App saves user height, weight and goal successfully', () {
     var sampleUserData = MocksAndSampleData.createUninitializedUserData();
     ApplicationManager appManager = ApplicationManager(sampleUserData);
-    // Create sample builder to pass dummy context to appManager
-    // This is required since the appManager will try to push the next screen
-    // to the given context
+    // Pass null in place of BuildContext, since this is just a unit test
+    // and no screen navigation is required.
     appManager.initializeCurrentUser(
       null,
       190,
