@@ -46,7 +46,8 @@ class ApplicationManager extends ChangeNotifier {
 
       showPostLoginScreen(context);
     } catch (e) {
-      // Thrown if login fails
+      print('Uh Oh');
+      print(e.toString());
       throw Exception('Invalid email / password');
     }
   }
@@ -123,7 +124,7 @@ class ApplicationManager extends ChangeNotifier {
   }
 
   /// Initialize a user by setting their height, weight and userGoal variables,
-  /// then push the Dashboard to screen
+  /// then push the Dashboard to screen. Null can be passed in place of context
   void initializeCurrentUser(
     BuildContext context,
     double height,
@@ -131,7 +132,9 @@ class ApplicationManager extends ChangeNotifier {
     UserGoals userGoal,
   ) {
     userData.loggedInUser.initializeUser(height, weight, userGoal);
-    Navigator.of(context).pushNamed(DashboardScreen.routeName);
+    if (context != null) {
+      Navigator.of(context).pushNamed(DashboardScreen.routeName);
+    }
   }
 
   /// Log a user out and display the HomeScreen

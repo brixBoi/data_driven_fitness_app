@@ -20,8 +20,10 @@ class User {
   ) {
     initialized = false;
   }
+
   ///method to initialize a user with their user stats and regime
   void initializeUser(double height, double weight, UserGoals userGoal) {
+    initialized = true;
     this.userStatistics = UserStatistics(height, weight, Set(), Set());
     this.userRegime = UserRegime.blank(userGoal);
   }

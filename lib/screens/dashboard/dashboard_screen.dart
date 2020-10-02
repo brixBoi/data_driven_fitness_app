@@ -1,9 +1,11 @@
 import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/history_tab.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/home_tab.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/navbar/bottom_navbar.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/stats_tab.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/workout_tab.dart';
+import 'package:data_driven_fitness_app/screens/profile_information.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:data_driven_fitness_app/screens/calculators/tdee_input_screen.dart';
@@ -31,6 +33,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final Key _menuKey = new Key('_menuKey');
 
   /// Map of tabs which can be displayed using BottomNavigationBar
   var tabs = {
@@ -55,6 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           centerTitle: true,
           title: Text("Stronk"),
           leading: IconButton(
+            key: _menuKey,
             icon: Icon(Icons.menu),
             onPressed: () => _scaffoldKey.currentState.openDrawer(),
           ),
@@ -65,30 +69,93 @@ class _DashboardScreenState extends State<DashboardScreen> {
           currentTab,
           _selectTab,
         ),
-        drawer: Drawer(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 135,
-                child: Container(
-                  color: Theme.of(context).accentColor,
-                ),
+        drawer: StronkDrawer(),
+      ),
+    );
+  }
+
+  /// Returns the currently selected tab
+  Widget _buildBody() {
+    return tabs[currentTab];
+  }
+
+  /// Set the current tab to the specified tab
+  Function _selectTab(DashboardTabItem buttonTab) {
+    if (currentTab != buttonTab) {
+      setState(() {
+        currentTab = buttonTab;
+      });
+    }
+  }
+}
+List<DropdownMenuItem<String>> _dropDownItem() {
+  List<String> calculatorList = [
+    "TDEE",
+    "BMI",
+    // "One-Rep Max",
+    // "Ideal Bodyweight"
+  ];
+  return calculatorList
+      .map(
+        (value) => DropdownMenuItem(
+          value: value,
+          child: Text(value),
+        ),
+      )
+      .toList();
+class StronkDrawer extends StatelessWidget {
+  const StronkDrawer({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ApplicationManager appManager = Provider.of<ApplicationManager>(context);
+    User currentUser = appManager.userData.loggedInUser;
+    final Key profileButtonKey = Key('profileButton');
+    return Drawer(
+      child: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 135,
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'Welcome ' + currentUser.firstName,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              FlatButton(
-                child: Row(
-                  children: [
-                    Icon(Icons.exit_to_app),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Text('Logout'),
-                    )
-                  ],
-                ),
-                onPressed: () {
-                  Provider.of<ApplicationManager>(context).logout(context);
-                },
-              ),
-              DropdownButtonHideUnderline(
+              color: Theme.of(context).accentColor,
+            ),
+          ),
+          StronkDrawerButton(
+            key: profileButtonKey,
+            iconData: Icons.person,
+            label: "Profile",
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(ProfileInformationScreen.routeName);
+            },
+          ),
+          StronkDrawerButton(
+            iconData: Icons.exit_to_app,
+            label: "Logout",
+            onPressed: () {
+              Provider.of<ApplicationManager>(context).logout(context);
+            },
+          ),
+          DropdownButtonHideUnderline(
                 child: DropdownButton(
                   value: _selectedCalculator,
                   items: _dropDownItem(),
@@ -109,42 +176,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   },
                   hint: Text('Calculators'),
                 ),
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
-
-  /// Returns the currently selected tab
-  Widget _buildBody() {
-    return tabs[currentTab];
-  }
-
-  /// Set the current tab to the specified tab
-  Function _selectTab(DashboardTabItem buttonTab) {
-    if (currentTab != buttonTab) {
-      setState(() {
-        currentTab = buttonTab;
-      });
-    }
-  }
 }
 
-List<DropdownMenuItem<String>> _dropDownItem() {
-  List<String> calculatorList = [
-    "TDEE",
-    "BMI",
-    // "One-Rep Max",
-    // "Ideal Bodyweight"
-  ];
-  return calculatorList
-      .map(
-        (value) => DropdownMenuItem(
-          value: value,
-          child: Text(value),
-        ),
-      )
-      .toList();
+class StronkDrawerButton extends StatelessWidget {
+  const StronkDrawerButton({
+    Key key,
+    @required this.iconData,
+    @required this.label,
+    this.onPressed,
+  }) : super(key: key);
+
+  final IconData iconData;
+  final String label;
+  final Function onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      child: Row(
+        children: [
+          Icon(iconData),
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Text(label),
+          )
+        ],
+      ),
+      onPressed: () => onPressed(),
+    );
+  }
 }

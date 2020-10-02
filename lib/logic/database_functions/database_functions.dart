@@ -2,7 +2,7 @@ import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
 
 /// Class used for database interactions, e.g. Signing in, Signing up, persisting user data changes etc.
 class DatabaseFunctions {
-  User sampleUser = User.blank(1, "zachmartin9001@gmail.com", "Test", "User");
+  User sampleUser = User.blank(1, "zachmartin9001@gmail.com", "Zach", "Martin");
   Exception invalidEmailorPass;
 
   /// Temp function for testing
@@ -14,7 +14,6 @@ class DatabaseFunctions {
       return sampleUser;
     } else {
       throw invalidEmailorPass;
-      return null;
     }
   }
 
@@ -36,9 +35,9 @@ class DatabaseFunctions {
     bool output = false;
     if (password.isNotEmpty) {
       output = true;
+    }
+    return output;
   }
-  return output;
-}
 
   /// Temp function for testing
   ///
@@ -55,9 +54,6 @@ class DatabaseFunctions {
       return false;
     }
   }
-
-
-
 
   /// Temp function for testing
   ///
