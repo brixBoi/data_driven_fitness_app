@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 class FirstTimeUserScreen extends StatefulWidget {
   // Constant for route navigation
   static final String routeName = "/first_timeuser_screen";
-  final TextEditingController heightFieldontroller = TextEditingController();
-  final TextEditingController weightFieldontroller = TextEditingController();
+  final TextEditingController heightFieldController = TextEditingController();
+  final TextEditingController weightFieldController = TextEditingController();
 
   @override
   _FirstTimeUserScreenState createState() => _FirstTimeUserScreenState();
@@ -65,14 +65,14 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
                   child: Column(
                     children: [
                       StronkTextFormField(
-                        controller: widget.heightFieldontroller,
+                        controller: widget.heightFieldController,
                         label: 'Your Height (cm)',
                         keyboardType: TextInputType.number,
                         regex: RXKey.dimension,
                         errorText: 'Enter a valid height (without unit)',
                       ),
                       StronkTextFormField(
-                        controller: widget.weightFieldontroller,
+                        controller: widget.weightFieldController,
                         label: 'Your Weight (kg)',
                         keyboardType: TextInputType.number,
                         regex: RXKey.dimension,
@@ -135,8 +135,8 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
                             Provider.of<ApplicationManager>(context)
                                 .initializeCurrentUser(
                               context,
-                              double.parse(widget.heightFieldontroller.text),
-                              double.parse(widget.weightFieldontroller.text),
+                              double.parse(widget.heightFieldController.text),
+                              double.parse(widget.weightFieldController.text),
                               userGoal,
                             );
                           } else {}
