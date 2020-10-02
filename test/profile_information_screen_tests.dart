@@ -73,6 +73,6 @@ void main() {
     // Check displayed id against actual user email
     // User ID is displayed with a '#' in front of it, so appending it to the
     // actual value to ensure they match if both values are accurate
-    expect(userData.loggedInUser.personId, '#' + displayedID.toString());
+    expect('#' + userData.loggedInUser.personId.toString(), (displayedID));
   });
 }
