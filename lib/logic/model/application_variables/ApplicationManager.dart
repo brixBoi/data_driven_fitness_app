@@ -34,15 +34,14 @@ class ApplicationManager extends ChangeNotifier {
   /// Attempts to log a user into the application, and pushes the next screen.
   /// and pushes the next screen (determined by showPostLoginScreen function)
   ///
-  /// If the login is unsuccessful, an error will be thrown.
   void login(
     BuildContext context,
     String email,
     String password,
-  ) {
+  )  async { // added async here, SHOULD support the await command below to support a Future<User> constructor
     try {
       // Try log the user in, and set the current logged in user to them
-      userData.setLoggedInUser(dbf.login(email, password));
+      userData.setLoggedInUser( await dbf.login(email, password));
 
       showPostLoginScreen(context);
     } catch (e) {
@@ -132,9 +131,9 @@ class ApplicationManager extends ChangeNotifier {
     UserGoals userGoal,
   ) {
     userData.loggedInUser.initializeUser(height, weight, userGoal);
-    if (context != null) {
+   // if (context != null) {
       Navigator.of(context).pushNamed(DashboardScreen.routeName);
-    }
+   // }
   }
 
   /// Log a user out and display the HomeScreen
