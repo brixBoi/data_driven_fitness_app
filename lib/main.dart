@@ -7,6 +7,7 @@ import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart'
 import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/login_or_signup_selection_screen.dart';
 import 'package:data_driven_fitness_app/screens/profile_information.dart';
+import 'package:data_driven_fitness_app/screens/program_selection_screen.dart';
 import 'package:data_driven_fitness_app/screens/signin_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/signup_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -60,6 +61,8 @@ class _MyAppState extends State<MyApp> {
           BMIInputScreen.routeName: (context) => BMIInputScreen(),
           ProfileInformationScreen.routeName: (context) =>
               ProfileInformationScreen(),
+          ProgramSelectionScreen.routeName: (context) =>
+              ProgramSelectionScreen(),
         },
         initialRoute: widget.testingRoute != null
             ? widget.testingRoute

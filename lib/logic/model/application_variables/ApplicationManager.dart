@@ -6,6 +6,7 @@ import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.d
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart';
 import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/login_or_signup_selection_screen.dart';
+import 'package:data_driven_fitness_app/screens/program_selection_screen.dart';
 import 'package:flutter/material.dart';
 
 /// Class used for managing application model and data
@@ -134,9 +135,7 @@ class ApplicationManager extends ChangeNotifier {
     UserGoals userGoal,
   ) {
     userData.loggedInUser.initializeUser(height, weight, userGoal);
-    // if (context != null) {
-    Navigator.of(context).pushNamed(DashboardScreen.routeName);
-    // }
+    Navigator.of(context).pushNamed(ProgramSelectionScreen.routeName);
   }
 
   /// Log a user out and display the HomeScreen

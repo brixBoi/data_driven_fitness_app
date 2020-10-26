@@ -26,4 +26,8 @@ class UserRegime {
   void setProgram(Program program) {
     currentProgram = program;
   }
+
+  hasProgram() {
+    return currentProgram != null;
+  }
 }
