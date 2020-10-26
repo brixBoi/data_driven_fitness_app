@@ -45,7 +45,6 @@ class ApplicationManager extends ChangeNotifier {
     try {
       // Try log the user in, and set the current logged in user to them
       userData.setLoggedInUser(await dbf.login(email, password));
-
       showPostLoginScreen(context);
     } catch (e) {
       print('Uh Oh');
@@ -129,8 +128,8 @@ class ApplicationManager extends ChangeNotifier {
   /// then push the Dashboard to screen. Null can be passed in place of context
   void initializeCurrentUser(
     BuildContext context,
-    double height,
-    double weight,
+    int height,
+    int weight,
     UserGoals userGoal,
   ) {
     userData.loggedInUser.initializeUser(height, weight, userGoal);

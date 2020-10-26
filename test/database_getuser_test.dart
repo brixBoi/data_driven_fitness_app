@@ -13,7 +13,7 @@ void main() {
     final client = MockClient();
 
     when(client.get(
-        'https://datadrivenfitnessapp.azurewebsites.net/api/Users/GetUser'))
+        'https://datadrivenfitness.azurewebsites.net/api/Users/GetUser'))
         .thenAnswer((_) async =>
         http.Response(
             '{"userId":1,"email":"test@outlook.com","password":"testPassword!123","firstname":"test","lastname":"test","height":"100.0","weight":"100.0","timeCreated":"0001-01-01T00:00:00","userWorkouts":"null"}',

@@ -135,8 +135,8 @@ class _FirstTimeUserScreenState extends State<FirstTimeUserScreen> {
                             Provider.of<ApplicationManager>(context)
                                 .initializeCurrentUser(
                               context,
-                              double.parse(widget.heightFieldController.text),
-                              double.parse(widget.weightFieldController.text),
+                              int.parse(widget.heightFieldController.text),
+                              int.parse(widget.weightFieldController.text),
                               userGoal,
                             );
                           } else {}

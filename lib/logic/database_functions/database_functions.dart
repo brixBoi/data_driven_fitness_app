@@ -27,7 +27,7 @@ class DatabaseFunctions {
   Future<User> login(String email, String userPassword) async {
     var base64auth = encodeAuthString(email, userPassword);
     final response = await http.get(
-      'https://datadrivenfitnessapp.azurewebsites.net/api/Users/GetUser',
+      'https://datadrivenfitness.azurewebsites.net/api/Users/GetUser',
       headers: {HttpHeaders.authorizationHeader: 'Basic '+ base64auth},
     );
 
@@ -40,6 +40,9 @@ class DatabaseFunctions {
      throw  invalidEmailorPass; // ("Http error code: " + response.statusCode.toString());
     }
   }
+
+
+
 
 
 

@@ -42,7 +42,7 @@ class User {
   }
 
   ///method to initialize a user with their user stats and regime
-  void initializeUser(double height, double weight, UserGoals userGoal) {
+  void initializeUser(int height, int weight, UserGoals userGoal) {
     initialized = true;
     this.userStatistics = UserStatistics(height, weight, Set(), Set());
     this.userRegime = UserRegime.blank(userGoal);
