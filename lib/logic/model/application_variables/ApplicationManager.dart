@@ -1,5 +1,7 @@
 import 'package:data_driven_fitness_app/logic/database_functions/database_functions.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
+import 'package:data_driven_fitness_app/logic/model/exercise_concepts/samples_workout_programs.dart';
+import 'package:data_driven_fitness_app/logic/model/exercise_concepts/workout_program.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart';
 import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
@@ -38,10 +40,11 @@ class ApplicationManager extends ChangeNotifier {
     BuildContext context,
     String email,
     String password,
-  )  async { // added async here, SHOULD support the await command below to support a Future<User> constructor
+  ) async {
+    // added async here, SHOULD support the await command below to support a Future<User> constructor
     try {
       // Try log the user in, and set the current logged in user to them
-      userData.setLoggedInUser( await dbf.login(email, password));
+      userData.setLoggedInUser(await dbf.login(email, password));
 
       showPostLoginScreen(context);
     } catch (e) {
@@ -131,14 +134,43 @@ class ApplicationManager extends ChangeNotifier {
     UserGoals userGoal,
   ) {
     userData.loggedInUser.initializeUser(height, weight, userGoal);
-   // if (context != null) {
-      Navigator.of(context).pushNamed(DashboardScreen.routeName);
-   // }
+    // if (context != null) {
+    Navigator.of(context).pushNamed(DashboardScreen.routeName);
+    // }
   }
 
   /// Log a user out and display the HomeScreen
   void logout(BuildContext context) {
     userData.userLoggedIn = false;
     Navigator.of(context).pushNamed(LoginOrSignupNavigationScreen.routeName);
+  }
+
+  getOtherPrograms() {
+    List<Program> output = List();
+
+    for (Program program in SamplePrograms.all) {
+      if (program.goal != userData.loggedInUser.userRegime.UserGoal) {
+        output.add(program);
+      }
+    }
+
+    return output;
+  }
+
+  getRecommendedPrograms() {
+    List<Program> output = List();
+
+    for (Program program in SamplePrograms.all) {
+      if (program.goal == userData.loggedInUser.userRegime.UserGoal) {
+        output.add(program);
+      }
+    }
+
+    return output;
+  }
+
+  void setUserProgram(Program program) {
+    userData.loggedInUser.userRegime.setProgram(program);
+    print('User Program set to ' + program.programName);
   }
 }

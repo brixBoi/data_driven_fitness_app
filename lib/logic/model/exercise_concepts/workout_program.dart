@@ -1,4 +1,6 @@
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.dart';
+import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.dart';
+import 'package:flutter/cupertino.dart';
 
 ///class to create a new Program
 ///
@@ -6,12 +8,15 @@ import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.da
 ///and work towards a goal, eg: Gaining Mass
 class Program {
   Program.name(this.programName, this.description) {
-    routines = Set<Routine>();
+    routines = List<Routine>();
   }
 
-  Program(this.programName, this.description, this.routines);
+  Program(this.programName, this.description, this.routines, this.goal,
+      this.tileGradient);
 
+  LinearGradient tileGradient;
   String programName;
   String description;
-  Set<Routine> routines;
+  List<Routine> routines;
+  UserGoals goal;
 }
