@@ -1,3 +1,4 @@
-[submodule "FitnessAPI"]
-	path = FitnessAPI
+[submodule "FitnessdbAPI"]
+	path = FitnessdbAPI
 	url = https://github.com/Yeetmasters/FitnessAPI
+	branch = master
