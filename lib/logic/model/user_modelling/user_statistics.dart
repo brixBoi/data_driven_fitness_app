@@ -10,8 +10,8 @@ class UserStatistics {
   UserStatistics(
       this.height, this.weight, this.workoutLogs, this.exerciseStats);
 
-  double height;
-  double weight;
+  int height;
+  int weight;
 
   //
   List<WorkoutLog> workoutLogs;
