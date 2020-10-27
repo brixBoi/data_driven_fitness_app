@@ -9,6 +9,7 @@ Users can keep track of their workout history, as well as view what routines are
 ## Techstack
 Uses flutter for all front end / app interaction, and azure for backend services
 
+View our API repository: [FitnessAPI](https://github.com/Yeetmasters/FitnessAPI)
 ## Sample Images
 ![Home screen](/images/homescreenshot.png)
 ![Program selection screen](/images/programscreenshot.png)
