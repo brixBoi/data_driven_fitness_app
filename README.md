@@ -4,6 +4,9 @@ A simple workout app called "Stronk" built using Flutter and Azure
 ## Description
 Has basic signup and login functionality, with a variety of workout programs users can choose from (Recommended based on their physical characteristics)
 
+## Techstack
+Uses flutter for all front end / app interaction, and azure for backend services
+
 ## Sample Images
 ![Home screen](/images/homescreenshot.png)
 ![Program selection screen](/images/programscreenshot.png)
