@@ -5,9 +5,9 @@ A simple workout app called "Stronk" built using Flutter and Azure
 Has basic signup and login functionality, with a variety of workout programs users can choose from (Recommended based on their physical characteristics)
 
 ## Sample Images
-![Home screen](/images/homescreen.png)
-![Program selection screen](/images/programscreen.png)
-![Workout overview screen](/images/workoutscreen.png)
+![Home screen](/images/homescreenshot.png)
+![Program selection screen](/images/programscreenshot.png)
+![Workout overview screen](/images/workoutscreenshot.png)
 
 ## Installation
 Simply create a new project from version control in either Android Studio, Intellij, Visual Studio code or any other IDE which supports the flutter framework.
