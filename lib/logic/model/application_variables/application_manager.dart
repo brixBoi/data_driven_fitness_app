@@ -180,13 +180,13 @@ class ApplicationManager extends ChangeNotifier {
 
   void setUserProgram(Program program) {
     userData.loggedInUser.userRegime.setProgram(program);
-    print('User Program set to ' + program.programName);
   }
 
-  Routine getDailyWorkoutRoutine() {
+  Routine getDailyWorkoutRoutine({Days customDate}) {
     int weekday = DateTime.now().weekday;
 
-    Days currentDayOfWeek = Days.values[weekday - 1];
+    Days currentDayOfWeek =
+        (customDate != null) ? customDate : Days.values[weekday - 1];
 //    Days currentDayOfWeek = Days.FRIDAY;
     Program currentProgram = userData.loggedInUser.userRegime.currentProgram;
 
