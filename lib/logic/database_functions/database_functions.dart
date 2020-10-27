@@ -61,7 +61,7 @@ class DatabaseFunctions {
     if (response.statusCode == 201 ) {
       final responseJson = json.decode(response.body);
       print('Sign up Successful: User added to DB');
-      return responseJson.statusCode;
+      return response.statusCode;
     } else {
       throw signUpError;
     }
