@@ -100,6 +100,8 @@ class ApplicationManager extends ChangeNotifier {
     if (userData.loggedInUser.initialized) {
       userData.loggedInUser.userRegime.currentProgram =
           SamplePrograms.buildMass;
+      userData.loggedInUser.userStatistics.workoutLogs =
+          SampleUserHistory.sampleWorkoutLogHistory;
       Navigator.of(context).pushNamed(DashboardScreen.routeName);
       // If the user is un-initialized, show the FirstTimeUserScreen
     } else {
