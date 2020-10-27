@@ -186,13 +186,14 @@ class ApplicationManager extends ChangeNotifier {
   Routine getDailyWorkoutRoutine() {
     int weekday = DateTime.now().weekday;
 
-    Days currentDayOfWeek = Days.values[weekday];
+    Days currentDayOfWeek = Days.values[weekday - 1];
 //    Days currentDayOfWeek = Days.FRIDAY;
     Program currentProgram = userData.loggedInUser.userRegime.currentProgram;
 
     Routine output;
 
     for (Routine routine in currentProgram.routines) {
+      print(routine.day.toString() + " " + currentDayOfWeek.toString());
       if (routine.day == currentDayOfWeek) {
         DateTime lastWorkoutDate =
             userData.loggedInUser.userStatistics.workoutLogs.last.date;
