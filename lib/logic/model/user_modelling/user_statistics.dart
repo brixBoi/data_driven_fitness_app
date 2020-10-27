@@ -14,7 +14,7 @@ class UserStatistics {
   double weight;
 
   //
-  Set<WorkoutLog> workoutLogs;
+  List<WorkoutLog> workoutLogs;
   //
-  Set<ExerciseStatistic> exerciseStats;
+  List<ExerciseStatistic> exerciseStats;
 }

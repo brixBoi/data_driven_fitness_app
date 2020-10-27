@@ -1,5 +1,5 @@
 import 'package:data_driven_fitness_app/constants.dart';
-import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/application_manager.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
 import 'package:data_driven_fitness_app/screens/active_workout_screen.dart';
 import 'package:data_driven_fitness_app/screens/calculators/bmi_input_screen.dart';

@@ -32,11 +32,12 @@ class User {
   ///Constructs User from JSON.
   /// As if a complete user - probably buggy until full db implementation
   factory User.fromJson(Map<String, dynamic> json) {
-    User user = User(json['userId'],
+    User user = User(
+        json['userId'],
         json['email'],
         json['firstname'],
         json['lastname'],
-        UserStatistics(json['height'], json['weight'], Set(), Set()),
+        UserStatistics(json['height'], json['weight'], List(), List()),
         UserRegime.blank(UserGoals.BULK));
     return user;
   }
@@ -44,11 +45,7 @@ class User {
   ///method to initialize a user with their user stats and regime
   void initializeUser(double height, double weight, UserGoals userGoal) {
     initialized = true;
-    this.userStatistics = UserStatistics(height, weight, Set(), Set());
+    this.userStatistics = UserStatistics(height, weight, List(), List());
     this.userRegime = UserRegime.blank(userGoal);
   }
-
-
 }
-
-

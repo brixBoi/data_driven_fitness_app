@@ -1,4 +1,4 @@
-import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/application_manager.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
 import 'package:data_driven_fitness_app/screens/calculators/bmi_input_screen.dart';
 import 'package:data_driven_fitness_app/screens/calculators/tdee_input_screen.dart';

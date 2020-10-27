@@ -2,7 +2,7 @@ import 'package:data_driven_fitness_app/constants.dart';
 import 'package:data_driven_fitness_app/custom_widgets/signup_field.dart';
 import 'package:data_driven_fitness_app/custom_widgets/stronk_custom_button.dart';
 import 'package:data_driven_fitness_app/custom_widgets/stronk_toggle_buttons.dart';
-import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/application_manager.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

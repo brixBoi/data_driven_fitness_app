@@ -1,5 +1,5 @@
 import 'package:data_driven_fitness_app/custom_widgets/routine_details.dart';
-import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/application_manager.dart';
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.dart';
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/workout_program.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart';

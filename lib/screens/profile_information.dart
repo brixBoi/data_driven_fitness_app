@@ -1,4 +1,4 @@
-import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/application_manager.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
 import 'package:flutter/material.dart';

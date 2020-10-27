@@ -1,4 +1,5 @@
 import 'package:data_driven_fitness_app/logic/database_functions/database_functions.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/sample_user_history.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
 import 'package:data_driven_fitness_app/logic/model/completed_activities/workout_log.dart';
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.dart';
@@ -139,6 +140,8 @@ class ApplicationManager extends ChangeNotifier {
     UserGoals userGoal,
   ) {
     userData.loggedInUser.initializeUser(height, weight, userGoal);
+    userData.loggedInUser.userStatistics.workoutLogs =
+        SampleUserHistory.sampleWorkoutLogHistory;
     Navigator.of(context).pushNamed(ProgramSelectionScreen.routeName);
   }
 
@@ -180,15 +183,20 @@ class ApplicationManager extends ChangeNotifier {
   Routine getDailyWorkoutRoutine() {
     int weekday = DateTime.now().weekday;
 
-//    Days currentDate = Days.values[weekday];
-    Days currentDate = Days.MONDAY;
+    Days currentDayOfWeek = Days.values[weekday];
+//    Days currentDayOfWeek = Days.FRIDAY;
     Program currentProgram = userData.loggedInUser.userRegime.currentProgram;
 
     Routine output;
 
     for (Routine routine in currentProgram.routines) {
-      if (routine.day == currentDate) {
-        output = routine;
+      if (routine.day == currentDayOfWeek) {
+        DateTime lastWorkoutDate =
+            userData.loggedInUser.userStatistics.workoutLogs.last.date;
+        DateTime currentDate = DateTime.now();
+        if (lastWorkoutDate.difference(currentDate).inDays != 0) {
+          output = routine;
+        }
       }
     }
 

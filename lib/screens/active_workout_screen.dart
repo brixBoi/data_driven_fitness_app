@@ -1,6 +1,6 @@
 import 'package:data_driven_fitness_app/constants.dart';
 import 'package:data_driven_fitness_app/custom_widgets/stronk_custom_button.dart';
-import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/application_manager.dart';
 import 'package:data_driven_fitness_app/logic/model/completed_activities/exercise_log.dart';
 import 'package:data_driven_fitness_app/logic/model/completed_activities/workout_log.dart';
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.dart';
@@ -29,10 +29,10 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
   int restTimerScreenIndex;
   int completedWorkoutIndex;
 
-  DateTime startTime;
+  DateTime startTime = DateTime.now();
   DateTime finishTime;
   double duration;
-  List<ExerciseLog> exerciseLogs;
+  List<ExerciseLog> exerciseLogs = List();
 
   void success() {
     addExerciseToLogList(routineExercises[currentExerciseIndex], true);
@@ -45,7 +45,6 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
         currentExerciseIndex++;
         currentScreenIndex = restTimerScreenIndex;
       } else {
-        print('Displaying completion screen');
         currentScreenIndex = completedWorkoutIndex;
       }
     });
@@ -84,52 +83,49 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
   }
 
   void constructExerciseScreens(Routine routine) {
-    routineExercises = routine.routineExercises;
-    totalExercises = 0;
-    for (RoutineExercise routineExercise in routine.routineExercises) {
-      totalExercises++;
-      switch (routineExercise.runtimeType) {
-        case CardioRoutineExercise:
-          exerciseScreens
-              .add(CardioExerciseScreen(routineExercise, success, failure));
-          break;
-        case CalisthenicRoutineExercise:
-          exerciseScreens.add(CalisthenicExerciseScreen(
-            routineExercise: routineExercise,
-            success: success,
-            failure: failure,
-          ));
-          break;
-        case WeightedRoutineExercise:
-          exerciseScreens.add(WeightedExerciseScreen(
-            routineExercise: routineExercise,
-            success: success,
-            failure: failure,
-          ));
-          break;
+    if (routine != null) {
+      routineExercises = routine.routineExercises;
+      totalExercises = 0;
+      for (RoutineExercise routineExercise in routine.routineExercises) {
+        totalExercises++;
+        switch (routineExercise.runtimeType) {
+          case CardioRoutineExercise:
+            exerciseScreens
+                .add(CardioExerciseScreen(routineExercise, success, failure));
+            break;
+          case CalisthenicRoutineExercise:
+            exerciseScreens.add(CalisthenicExerciseScreen(
+              routineExercise: routineExercise,
+              success: success,
+              failure: failure,
+            ));
+            break;
+          case WeightedRoutineExercise:
+            exerciseScreens.add(WeightedExerciseScreen(
+              routineExercise: routineExercise,
+              success: success,
+              failure: failure,
+            ));
+            break;
+        }
       }
+      exerciseScreens.add(FailureScreen(
+        cancelWorkout: cancelWorkout,
+        tryAgain: tryAgain,
+        skipExercise: skipExercise,
+      ));
+      failureScreenIndex = totalExercises;
+
+      exerciseScreens.add(RestScreen(
+        continueFromRest: continueFromRest,
+      ));
+      restTimerScreenIndex = totalExercises + 1;
+
+      exerciseScreens
+          .add(CompletedWorkoutScreen(completeWorkout: completeWorkout));
+
+      completedWorkoutIndex = totalExercises + 2;
     }
-    exerciseScreens.add(FailureScreen(
-      cancelWorkout: cancelWorkout,
-      tryAgain: tryAgain,
-      skipExercise: skipExercise,
-    ));
-    failureScreenIndex = totalExercises;
-
-    exerciseScreens.add(RestScreen(
-      continueFromRest: continueFromRest,
-    ));
-    restTimerScreenIndex = totalExercises + 1;
-
-    exerciseScreens
-        .add(CompletedWorkoutScreen(completeWorkout: completeWorkout));
-
-    completedWorkoutIndex = totalExercises + 2;
-  }
-
-  void startLog() {
-    startTime = DateTime.now();
-    exerciseLogs = List();
   }
 
   void addExerciseToLogList(
@@ -140,7 +136,7 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
         CalisthenicRoutineExercise exercise = routineExercise;
         log = CalisthenicExerciseLog(
           exercise.exercise,
-          true,
+          completedSuccessfully,
           exercise.sets,
           exercise.reps,
         );
@@ -149,7 +145,7 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
         CardioRoutineExercise exercise = routineExercise;
         log = CardioExerciseLog(
           exercise.exercise,
-          true,
+          completedSuccessfully,
           exercise.duration,
         );
         break;
@@ -157,7 +153,7 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
         WeightedRoutineExercise exercise = routineExercise;
         log = WeightedExerciseLog(
           exercise.exercise,
-          true,
+          completedSuccessfully,
           exercise.sets,
           exercise.reps,
           exercise.weight,
@@ -165,19 +161,24 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
         break;
     }
     exerciseLogs.add(log);
+    print(exerciseLogs.length);
   }
 
   void submitLog() {
     ApplicationManager appManager = Provider.of<ApplicationManager>(context);
     finishTime = DateTime.now();
-    appManager.logWorkoutSession(
-      WorkoutLog(
-        startTime,
-        TimeOfDay(hour: startTime.hour, minute: startTime.minute),
-        TimeOfDay(hour: finishTime.hour, minute: finishTime.minute),
-        exerciseLogs,
-      ),
+    WorkoutLog workoutLog = WorkoutLog(
+      startTime,
+      TimeOfDay(hour: startTime.hour, minute: startTime.minute),
+      TimeOfDay(hour: finishTime.hour, minute: finishTime.minute),
+      exerciseLogs,
     );
+
+    setState(() {
+      appManager.logWorkoutSession(
+        workoutLog,
+      );
+    });
   }
 
   @override
@@ -185,9 +186,11 @@ class _ActiveWorkoutScreenState extends State<ActiveWorkoutScreen> {
     ApplicationManager appManager = Provider.of<ApplicationManager>(context);
     Routine dailyWorkoutRoutine = appManager.getDailyWorkoutRoutine();
     constructExerciseScreens(dailyWorkoutRoutine);
-    startLog();
-    return Material(
-      child: exerciseScreens[currentScreenIndex],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Material(
+        child: exerciseScreens[currentScreenIndex],
+      ),
     );
   }
 }
@@ -810,7 +813,10 @@ class _CompletedWorkoutScreenState extends State<CompletedWorkoutScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('wow good job'),
+          Text(
+            'All done!',
+            style: Theme.of(context).primaryTextTheme.headline3,
+          ),
           StronkFlatButton(
             title: 'Finish',
             onPress: widget.completeWorkout,

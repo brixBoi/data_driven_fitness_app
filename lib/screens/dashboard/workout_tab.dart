@@ -1,5 +1,5 @@
 import 'package:data_driven_fitness_app/constants.dart';
-import 'package:data_driven_fitness_app/logic/model/application_variables/ApplicationManager.dart';
+import 'package:data_driven_fitness_app/logic/model/application_variables/application_manager.dart';
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
