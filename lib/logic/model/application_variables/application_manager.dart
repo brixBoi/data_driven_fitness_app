@@ -53,7 +53,6 @@ class ApplicationManager extends ChangeNotifier {
       userData.setLoggedInUser(await dbf.login(email, password));
       showPostLoginScreen(context);
     } catch (e) {
-      print('Uh Oh');
       print(e.toString());
       throw Exception('Invalid email / password');
     }
@@ -119,14 +118,15 @@ class ApplicationManager extends ChangeNotifier {
     if (dbf.checkExistingEmail(email)) {
       throw new Exception('Email already exists');
     } else {
-      dbf.signup(
+      userData.loggedInUser = dbf.signup(
         firstName,
         lastName,
         email,
         password,
       );
       // Log the user in
-      login(context, email, password);
+     //login(context, email, password);
+      showPostLoginScreen(context);
     }
   }
 

@@ -9,6 +9,7 @@ class DatabaseFunctions {
   // sampleUser needed with fake api data for login per se, but intermediary functions still do.
   User sampleUser = User.blank(2, "bhenshall@outlook.com", "Ben", "Henshall");
   Exception invalidEmailorPass;
+  Exception signUpError;
 
 
   /// encodes the string email:password into base64 for inclusion in http authorization header
@@ -41,10 +42,30 @@ class DatabaseFunctions {
     }
   }
 
+  /// Attempts to add user to DB
+  /// 201 == account added.
+  /// Takes in info from signup[ form, returns the status code.
+  Future<int> createInitialUserDbEntry(User u, String pwd) async {
+    final response = await http.post(
+        'https://datadrivenfitness.azurewebsites.net/api/Users',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'},
+        body: jsonEncode(<String, String>{
+          'email': u.email,
+          'password': pwd,
+          'firstname': u.firstName,
+          'lastname': u.lastName
+        }),
+    );
 
-
-
-
+    if (response.statusCode == 201 ) {
+      final responseJson = json.decode(response.body);
+      print('Sign up Successful: User added to DB');
+      return responseJson.statusCode;
+    } else {
+      throw signUpError;
+    }
+  }
 
   /// Temp function for testing
   ///
@@ -59,8 +80,6 @@ class DatabaseFunctions {
       throw invalidEmailorPass;
     }
   }*/
-
-
 
   ///TODO: replace with HTTP GET call
   /// Temp function for testing
@@ -102,7 +121,7 @@ class DatabaseFunctions {
   }
 
   /// Temp function for testing
-  /// TODO: Configure secure HTTP PUT
+  ///
   /// Sign the user up, return the signed up user
   User signup(
     String firstName,
@@ -112,6 +131,9 @@ class DatabaseFunctions {
   ) {
     bool result = true;
     sampleUser = User.blank(99, email, firstName, lastName);
+
+    createInitialUserDbEntry(sampleUser, password);
+
     return sampleUser;
   }
 
