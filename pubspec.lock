@@ -394,6 +394,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.10"
+  timer_count_down:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "31184683f712ee5483817bb5bf17deb3bfad943b"
+      url: "https://github.com/Yeetmasters/simple_count_down"
+    source: git
+    version: "1.0.4+1"
   typed_data:
     dependency: transitive
     description:
@@ -445,3 +454,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.9.0-14.0.dev <3.0.0"
+  flutter: ">=1.10.0 <2.0.0"

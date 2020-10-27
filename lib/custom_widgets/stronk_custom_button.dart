@@ -42,7 +42,10 @@ class StronkFlatButton extends StatelessWidget {
           child: Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(color: textColor),
+            style: TextStyle(
+              fontSize: 18,
+              color: textColor,
+            ),
           ),
         ),
       ),

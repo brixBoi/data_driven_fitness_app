@@ -1,8 +1,12 @@
 import 'package:data_driven_fitness_app/logic/database_functions/database_functions.dart';
 import 'package:data_driven_fitness_app/logic/model/application_variables/user_data.dart';
+import 'package:data_driven_fitness_app/logic/model/completed_activities/workout_log.dart';
+import 'package:data_driven_fitness_app/logic/model/exercise_concepts/routine.dart';
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/samples_workout_programs.dart';
 import 'package:data_driven_fitness_app/logic/model/exercise_concepts/workout_program.dart';
+import 'package:data_driven_fitness_app/logic/model/model_constants.dart';
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user_regime.dart';
+import 'package:data_driven_fitness_app/screens/active_workout_screen.dart';
 import 'package:data_driven_fitness_app/screens/dashboard/dashboard_screen.dart';
 import 'package:data_driven_fitness_app/screens/first_time_user_screen.dart';
 import 'package:data_driven_fitness_app/screens/login_or_signup_selection_screen.dart';
@@ -171,5 +175,31 @@ class ApplicationManager extends ChangeNotifier {
   void setUserProgram(Program program) {
     userData.loggedInUser.userRegime.setProgram(program);
     print('User Program set to ' + program.programName);
+  }
+
+  Routine getDailyWorkoutRoutine() {
+    int weekday = DateTime.now().weekday;
+
+//    Days currentDate = Days.values[weekday];
+    Days currentDate = Days.MONDAY;
+    Program currentProgram = userData.loggedInUser.userRegime.currentProgram;
+
+    Routine output;
+
+    for (Routine routine in currentProgram.routines) {
+      if (routine.day == currentDate) {
+        output = routine;
+      }
+    }
+
+    return output;
+  }
+
+  void startDailyWorkout(BuildContext context) {
+    Navigator.of(context).pushNamed(ActiveWorkoutScreen.routeName);
+  }
+
+  void logWorkoutSession(WorkoutLog log) {
+    userData.loggedInUser.userStatistics.workoutLogs.add(log);
   }
 }

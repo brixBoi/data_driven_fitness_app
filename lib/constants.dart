@@ -20,7 +20,7 @@ class Constants {
         headline5: TextStyle(
           color: Colors.black,
           fontFamily: 'Questrial',
-          fontSize: 17,
+          fontSize: 23,
         ),
         headline6: TextStyle(
           color: Colors.black,
