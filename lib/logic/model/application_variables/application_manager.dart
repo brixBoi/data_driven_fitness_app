@@ -98,6 +98,8 @@ class ApplicationManager extends ChangeNotifier {
   void showPostLoginScreen(BuildContext context) {
     // If the user is initialized, show the dashboard
     if (userData.loggedInUser.initialized) {
+      userData.loggedInUser.userRegime.currentProgram =
+          SamplePrograms.buildMass;
       Navigator.of(context).pushNamed(DashboardScreen.routeName);
       // If the user is un-initialized, show the FirstTimeUserScreen
     } else {
@@ -125,7 +127,7 @@ class ApplicationManager extends ChangeNotifier {
         password,
       );
       // Log the user in
-     //login(context, email, password);
+      //login(context, email, password);
       showPostLoginScreen(context);
     }
   }
