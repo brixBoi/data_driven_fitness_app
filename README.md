@@ -6,8 +6,8 @@ Has basic signup and login functionality, with a variety of workout programs use
 
 ## Sample Images
 ![Home screen](/images/homescreen.png)
-![Program selection screen](/images/programscreen.png)
-![Workout overview screen](/images/workoutscreen.png)
+![Program selection screen](/images/programscreen.png | width=100)
+![Workout overview screen](/images/workoutscreen.png | width=100)
 
 ## Installation
 Simply create a new project from version control in either Android Studio, Intellij, Visual Studio code or any other IDE which supports the flutter framework.
