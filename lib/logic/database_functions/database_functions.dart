@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:data_driven_fitness_app/logic/model/user_modelling/user.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
