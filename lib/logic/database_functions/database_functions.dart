@@ -11,16 +11,9 @@ class DatabaseFunctions {
   Exception invalidEmailorPass;
   Exception signUpError;
 
-
   /// encodes the string email:password into base64 for inclusion in http authorization header
-  String encodeAuthString(String e, String p) {
-    var userInformation = e+":"+p;
-    print(userInformation);
-    var bytes = utf8.encode(userInformation);
-    var base64auth = base64.encode(bytes);
-    print(base64auth);
-
-    return base64auth;
+  String encodeAuthString(String email, String password) {
+    return base64.encode(utf8.encode(email + ":" + password));
   }
 
   /// sends GET request with base64auth string to retrieve user info at sign in
@@ -29,7 +22,7 @@ class DatabaseFunctions {
     var base64auth = encodeAuthString(email, userPassword);
     final response = await http.get(
       'https://datadrivenfitness.azurewebsites.net/api/Users/GetUser',
-      headers: {HttpHeaders.authorizationHeader: 'Basic '+ base64auth},
+      headers: {HttpHeaders.authorizationHeader: 'Basic ' + base64auth},
     );
 
     // 200 = success, create our user information
@@ -38,7 +31,7 @@ class DatabaseFunctions {
       print('Login Successful');
       return User.fromJson(responseJson);
     } else {
-     throw  invalidEmailorPass; // ("Http error code: " + response.statusCode.toString());
+      throw invalidEmailorPass; // ("Http error code: " + response.statusCode.toString());
     }
   }
 
@@ -47,19 +40,19 @@ class DatabaseFunctions {
   /// Takes in info from signup[ form, returns the status code.
   Future<int> createInitialUserDbEntry(User u, String pwd) async {
     final response = await http.post(
-        'https://datadrivenfitness.azurewebsites.net/api/Users',
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'},
-        body: jsonEncode(<String, String>{
-          'email': u.email,
-          'password': pwd,
-          'firstname': u.firstName,
-          'lastname': u.lastName
-        }),
+      'https://datadrivenfitness.azurewebsites.net/api/Users',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(<String, String>{
+        'email': u.email,
+        'password': pwd,
+        'firstname': u.firstName,
+        'lastname': u.lastName
+      }),
     );
 
-    if (response.statusCode == 201 ) {
-      final responseJson = json.decode(response.body);
+    if (response.statusCode == 201) {
       print('Sign up Successful: User added to DB');
       return response.statusCode;
     } else {
