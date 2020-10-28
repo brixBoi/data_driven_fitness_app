@@ -11,13 +11,21 @@ class DatabaseFunctions {
   Exception invalidEmailorPass;
   Exception signUpError;
 
-  /// encodes the string email:password into base64 for inclusion in http authorization header
+  /// encodes the string email:password into base64 for inclusion in http authorization header.
+  /// Base64 encoding will not operate on Strings, utf is intermediary.
+  /// Email and Password strings -> concatenated, correct format string -> utf -> base64.
+  /// @params: the user's email and password.
+  /// @return
   String encodeAuthString(String email, String password) {
     return base64.encode(utf8.encode(email + ":" + password));
   }
 
-  /// sends GET request with base64auth string to retrieve user info at sign in
+  /// sends GET request with base64auth string to retrieve user info at sign in.
+  /// Response header must contain Basic Authorization info: 'Basic EmailInBase64:PassInBase64'
   /// Returns the complete user object
+  ///
+  /// @param email, password: Sign in form fields
+  /// @return the logged in user object, corresponding to input login information.
   Future<User> login(String email, String userPassword) async {
     var base64auth = encodeAuthString(email, userPassword);
     final response = await http.get(
@@ -25,7 +33,7 @@ class DatabaseFunctions {
       headers: {HttpHeaders.authorizationHeader: 'Basic ' + base64auth},
     );
 
-    // 200 = success, create our user information
+    // 200 = successful GET, user information retrieved.
     if (response.statusCode == 200) {
       final responseJson = json.decode(response.body);
       print('Login Successful');
@@ -35,23 +43,28 @@ class DatabaseFunctions {
     }
   }
 
-  /// Attempts to add user to DB
-  /// 201 == account added.
-  /// Takes in info from signup[ form, returns the status code.
-  Future<int> createInitialUserDbEntry(User u, String pwd) async {
+  /// Attempts to add user to DB.
+  /// Header needs to specify application/json and utf-8 encoding.
+  /// Body needs to Map email, password, fname and lname.
+  ///
+  /// @params User: Semi-complete user object from signup form entry.
+  /// @params pwd: Password from signup form.
+  /// @return http response status code - 201 indicates successful creation.
+  Future<int> createInitialUserDbEntry(User user, String pwd) async {
     final response = await http.post(
       'https://datadrivenfitness.azurewebsites.net/api/Users',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },
       body: jsonEncode(<String, String>{
-        'email': u.email,
-        'password': pwd,
-        'firstname': u.firstName,
-        'lastname': u.lastName
+        'email': user.email,
+        'password': pwd, // passed from string, as user.pwd only possible until after added to db.
+        'firstname': user.firstName,
+        'lastname': user.lastName
       }),
     );
 
+    // 201 = successful POST, user successful creation in DB.
     if (response.statusCode == 201) {
       print('Sign up Successful: User added to DB');
       return response.statusCode;
